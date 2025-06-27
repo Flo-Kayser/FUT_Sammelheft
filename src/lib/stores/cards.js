@@ -4,8 +4,8 @@ export const allCardsStore = writable([]);
 
 export const cardsFilter = writable({
     versionId:'',
-    league: '',
-    club: ''
+    leagueId: '',
+    clubId: ''
 })
 export const cardsByVersionId = derived(
     [allCardsStore, cardsFilter],
@@ -19,8 +19,8 @@ export const filteredCards = derived(
     [cardsByVersionId, cardsFilter],
     ([$cardsByVersionId, $cardsFilter]) => {
         return $cardsByVersionId.filter(card => {
-            const leagueMatches = !$cardsFilter.league || card.leagueId === Number($cardsFilter.league);
-            const clubMatches = !$cardsFilter.club || card.clubId === Number($cardsFilter.club);
+            const leagueMatches = !$cardsFilter.leagueId || card.leagueId === Number($cardsFilter.leagueId);
+            const clubMatches = !$cardsFilter.clubId || card.clubId === Number($cardsFilter.clubId);
             return leagueMatches && clubMatches;
         });
     }

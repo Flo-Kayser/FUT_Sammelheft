@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import { cardsFilter } from './stores/cards';
 
 export async function getVersionIdForSquad(squadSlug, coreData) {
 	const rarity = coreData.data.rarities.find(
@@ -10,10 +11,8 @@ export async function getVersionIdForSquad(squadSlug, coreData) {
 	return rarity.eaId;
 }
 
-export async function getCardsForVersion(versionId) {
-	const cardsRaw = await fs.readFile('static/cards.json', 'utf-8');
-	const cards = JSON.parse(cardsRaw);
-  return cards
-    .filter((card) => card.versionId === versionId)
-    .sort((a, b) => b.rating - a.rating);
+
+
+export function resetCardsFilter(){
+	cardsFilter.update((f) => ({ ...f, leagueId: '', clubId: '' }));
 }

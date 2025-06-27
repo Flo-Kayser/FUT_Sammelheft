@@ -3,15 +3,17 @@
 	import { toggleCard } from '$lib/stores/collectionStore.js';
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
 	import { collectedCardsStore } from '$lib/stores/collectionStore.js';
-	import {  cardsByVersionId,filteredCards } from '$lib/stores/cards.js';
-
+	import { cardsByVersionId, filteredCards } from '$lib/stores/cards.js';
 
 	export let data;
 	const { squadName, versionId, coreData, additionalCoreData } = data;
 	const { data: core } = coreData;
 
-	$:currentPage= data.currentPage
-	$: paginatedCards= $filteredCards?.slice((currentPage-1)*data?.cardsPerPage, (currentPage-1)*data?.cardsPerPage + data?.cardsPerPage)
+	$: currentPage = data.currentPage;
+	$: paginatedCards = $filteredCards?.slice(
+		(currentPage - 1) * data?.cardsPerPage,
+		(currentPage - 1) * data?.cardsPerPage + data?.cardsPerPage
+	);
 
 	const cardVersion = core?.rarities?.find((rarity) => rarity.eaId === versionId);
 
