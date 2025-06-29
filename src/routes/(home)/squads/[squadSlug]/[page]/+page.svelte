@@ -3,14 +3,14 @@
 	import { toggleCard } from '$lib/stores/collectionStore.js';
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
 	import { collectedCardsStore } from '$lib/stores/collectionStore.js';
-	import { cardsByVersionId, filteredCards } from '$lib/stores/cards.js';
+	import { cardsByVersionId, filteredCards,sortFilteredCardsByRating } from '$lib/stores/cards.js';
 
 	export let data;
 	const { squadName, versionId, coreData, additionalCoreData } = data;
 	const { data: core } = coreData;
 
 	$: currentPage = data.currentPage;
-	$: paginatedCards = $filteredCards?.slice(
+	$: paginatedCards = $sortFilteredCardsByRating?.slice(
 		(currentPage - 1) * data?.cardsPerPage,
 		(currentPage - 1) * data?.cardsPerPage + data?.cardsPerPage
 	);
@@ -46,7 +46,6 @@
 </script>
 
 <section>
-	{currentPage}
 	{#if paginatedCards?.length > 0}
 		<section class="flex flex-wrap">
 			{#each paginatedCards as card, i}

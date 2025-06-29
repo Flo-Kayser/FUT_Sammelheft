@@ -1,4 +1,5 @@
 <script>
+	import { resolveClub } from '$lib/Utils.js';
 	export let card, cardVersion, squadName, core, additionalCoreData;
 	let club;
 
@@ -16,43 +17,9 @@
 
 	$: {
 		club = resolveClub(card, core, additionalCoreData);
-		
 	}
 
-	function resolveClub(card, core, additionalCoreData) {
-	if (!card?.clubId) return null;
-
-	let club = core?.clubs?.find((c) => c.eaId === card.clubId);
-	if (club) return club;
-
-	const addClubs = additionalCoreData?.clubs;
-	if (!addClubs) return null;
-
-	const clubInAdd = addClubs?.find((c) => c.id === card.clubId);
-	if (!clubInAdd) return null;
-
-	if (clubInAdd.isWomen) {
-		const matchStrategies = [
-			(c) => clubInAdd.name?.includes(c.name) && c.id !== clubInAdd.id,
-			(c) =>
-				(c.name?.includes(clubInAdd.name) || clubInAdd.name?.includes(c.name)) &&
-				c.id !== clubInAdd.id,
-			(c) => clubInAdd.abbrName === c.abbrName && c.id !== clubInAdd.id,
-		];
-
-		for (const strategy of matchStrategies) {
-			const match = addClubs.find(strategy);
-			if (match) {
-				club = core?.clubs?.find(
-					(c) => c.eaId === match.id || match.name?.includes(c.name)
-				);
-				if (club) return club;
-			}
-		}
-	} 
-	console.warn('Club not found for card:', card);
-	return null;
-}
+	
 
 
 </script>

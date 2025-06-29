@@ -1,6 +1,7 @@
 <script>
     export let currentPage, totalPages
 </script>
+<section>
 
 {#if totalPages > 1}
     <h2 class="text-center text-lg font-bold">Seite {currentPage} von {totalPages}</h2>
@@ -36,3 +37,4 @@
 
 </div>
 {/if}
+</section>

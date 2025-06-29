@@ -3,35 +3,52 @@
 	import { cardsByVersionId, filteredCards, cardsFilter } from '$lib/stores/cards.js';
 	import { goto } from '$app/navigation';
 	import { resetCardsFilter } from '$lib/Utils';
+	import DropDown from '$lib/svelte/dropDown.svelte';
 
 	export let data;
 	export let children;
+
+	let _isDropdownOpen = {
+		leagues: false,
+		clubs: false
+	};
 	$: currentPage = data?.currentPage;
 	$: totalPages = Math.ceil(($filteredCards?.length ?? 0) / (data?.cardsPerPage ?? 1));
-	$: cardsFilter.subscribe((f) => console.log('Cards Filter:', f));
 
 	$: leagueIds = $cardsByVersionId
 		? Array.from(
 				new Set($cardsByVersionId.filter((card) => card.leagueId).map((card) => card.leagueId))
-			)
+			).sort((a, b) => a - b)
 		: [];
 
-	$: console.log('League IDs:', leagueIds);
+	$: clubIds = $cardsByVersionId
+		? Array.from(
+				new Set($cardsByVersionId.filter((card) => card.clubId).map((card) => card.clubId))
+			).sort((a, b) => a - b)
+		: [];
 </script>
 
-<a onclick={()=>resetCardsFilter()} href="/squads">Squad Übersicht</a>
+<section class="relative">
+	<a onclick={() => resetCardsFilter()} href="/squads">Squad Übersicht</a>
 
-<PaginationNav {currentPage} {totalPages} />
+	<PaginationNav {currentPage} {totalPages} />
 
-<div class="flex gap-2 bg-red-400">
-	{#each leagueIds as leagueId}
-		<button
-			onclick={() => {
-				cardsFilter.update((f) => ({ ...f, leagueId }));
-			}}>{leagueId}</button
-		>
-	{/each}
-    <button onclick={()=> resetCardsFilter()}>ALL</button>
-</div>
+	<div class="absolute top-0 right-0 flex gap-2  flex-col">
+		<DropDown
+			bind:_isDropdownOpen
+			coreData={data?.coreData}
+			idArray={leagueIds}
+			filterEndpoint={'leagueId'}
+			coreEndpoint={'leagues'}
+		/>
+		<DropDown
+			bind:_isDropdownOpen
+			coreData={data?.coreData}
+			idArray={clubIds}
+			filterEndpoint={'clubId'}
+			coreEndpoint={'clubs'}
+		/>
+	</div>
+</section>
 
 {@render children()}
