@@ -19,17 +19,17 @@ collectedCardsStore.subscribe((value) => {
 });
 
 
-export function toggleCard(versionId, assetId) {
+export function toggleCard(versionId, resourceId) {
 	let result;
 	let updatedMap;
 
 	collectedCardsStore.update((map) => {
 		const currentSet = new Set(map[versionId] ?? []);
-		if (currentSet.has(assetId)) {
-			currentSet.delete(assetId);
+		if (currentSet.has(resourceId)) {
+			currentSet.delete(resourceId);
 			result = true;
 		} else {
-			currentSet.add(assetId);
+			currentSet.add(resourceId);
 			result = false;
 		}
 

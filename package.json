@@ -26,6 +26,7 @@
 		"vite-plugin-devtools-json": "^0.2.0"
 	},
 	"dependencies": {
+		"all": "^0.0.0",
 		"axios": "^1.10.0"
 	}
 }
