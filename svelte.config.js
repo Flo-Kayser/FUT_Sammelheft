@@ -1,9 +1,5 @@
-import vercel from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-static';
 
-const config = {
-  kit: {
-    adapter: vercel()
-  }
-};
+const config = { kit: { adapter: adapter() } };
 
 export default config;
