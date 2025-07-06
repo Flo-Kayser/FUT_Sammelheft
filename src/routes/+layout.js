@@ -22,3 +22,5 @@ export async function load() {
     // 4. Gib alles gemeinsam zurück
     return { coreData, additionalCoreData, cards };
 }
+
+export const prerender = true;
