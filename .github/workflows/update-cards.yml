@@ -32,3 +32,4 @@ jobs:
           else
             git commit -m "Update cards.json via GitHub Actions"
             git push origin master
+          fi 
