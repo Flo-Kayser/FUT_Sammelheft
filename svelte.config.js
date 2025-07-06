@@ -1,15 +1,8 @@
-import adapter from '@sveltejs/adapter-static';
+import vercel from '@sveltejs/adapter-vercel';
 
 const config = {
   kit: {
-    adapter: adapter({
-      pages: 'docs',
-      assets: 'docs',
-      fallback: 'index.html'  // 🔥 wichtig!
-    }),
-    paths: {
-      base: '/FUT_Sammelheft'
-    }
+    adapter: vercel()
   }
 };
 
