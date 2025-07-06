@@ -1,10 +1,7 @@
 name: Update Player Cards
 
 on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
+  workflow_dispatch:  # nur manuell starten über GitHub UI
 
 jobs:
   update-cards:
@@ -31,7 +28,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add static/cards.json
           if git diff --cached --quiet; then
-            echo "Keine Änderungen an cards.json"
+            echo "Keine Änderungen – cards.json ist gleich."
           else
             git commit -m "Update cards.json via GitHub Actions"
             git push origin master
