@@ -1,7 +1,7 @@
 name: Update Player Cards
 
 on:
-  workflow_dispatch:  # nur manuell starten über GitHub UI
+  workflow_dispatch: # nur manuell starten über GitHub UI
 
 jobs:
   update-cards:
