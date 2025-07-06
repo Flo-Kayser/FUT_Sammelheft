@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	export let data;
 	const { coreData, cards } = data;
 	const { data: core } = coreData;
@@ -18,13 +19,13 @@
 <section class="grid grid-cols-3 gap-4 p-8">
 	{#each core?.rarities as squad}
 		{#if hasVersionId(squad.eaId)}
-			<a
-				href={`/squads/${squad.slug}/page=1`}
-				class="flex w-full items-center gap-4 rounded-lg border-2 p-2"
+			<button
+				onclick={() => goto(`/squads/${squad.slug}/page=1`)}
+				class="flex w-full items-center gap-4 rounded-lg border-2 p-2 cursor-pointer"
 			>
 				<img src={squad.compactImageUrl} alt={squad.name} class="w-10" />
 				<div>{squad.name}</div>
-			</a>
+			</button>
 		{/if}
 	{/each}
 </section>

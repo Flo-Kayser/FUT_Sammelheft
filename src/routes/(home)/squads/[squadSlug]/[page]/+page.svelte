@@ -3,8 +3,9 @@
 	import { toggleCard } from '$lib/stores/collectionStore.js';
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
 	import { collectedCardsStore } from '$lib/stores/collectionStore.js';
-	import { cardsByVersionId, filteredCards,sortFilteredCardsByRating } from '$lib/stores/cards.js';
+	import { cardsByVersionId, filteredCards, sortFilteredCardsByRating } from '$lib/stores/cards.js';
 	import { settingsStore } from '$lib/stores/settings.js';
+	import { highlightedCardStore } from '$lib/stores/smallStores.js'
 
 	export let data;
 	const { squadName, versionId, coreData, additionalCoreData } = data;
@@ -44,15 +45,36 @@
 
 		toggleCard(versionId, resourceId);
 	}
+
+	import { onDestroy } from 'svelte';
+
+	let localHighlightedId = null;
+	let timeout;
+
+	const unsubscribe = highlightedCardStore.subscribe((id) => {
+		localHighlightedId = id;
+
+		if (id) {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				highlightedCardStore.set(null);
+			}, 2000);
+		}
+	});
+
+	onDestroy(() => {
+		unsubscribe();
+		clearTimeout(timeout);
+	});
 </script>
 
-<section class="pt-8 px-8">
+<section class="px-8 pt-8">
 	{#if paginatedCards?.length > 0}
-		<div class="flex flex-wrap gap-x-2 items-center">
+		<div class="flex flex-wrap items-center gap-x-2">
 			{#each paginatedCards as card, i}
 				<button
 					on:click={() => toggleCardCollection(i)}
-					class={`cursor-pointer  ${isUncollected[i] ? 'opacity-80 grayscale' : ''}`}
+					class={`cursor-pointer  ${isUncollected[i] ? 'opacity-80 grayscale' : ''} ${card.resourceId === localHighlightedId ? 'animate-pingCard' : ''}`}
 					style={`color: #${cardVersion?.textColor[0]}`}
 				>
 					<RenderedCard {card} {cardVersion} {squadName} {core} {additionalCoreData} />

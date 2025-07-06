@@ -6,6 +6,7 @@
 	import DropDown from '$lib/svelte/dropDown.svelte';
 	import PageSettings from '$lib/svelte/pageSettings.svelte';
 	import { settingsStore } from '$lib/stores/settings.js';
+	import PlayerSearch from '$lib/svelte/playerSearch.svelte';
 
 	export let data;
 	export let children;
@@ -26,19 +27,20 @@
 			).sort((a, b) => a - b)
 		: [];
 
-	$: clubIds = $cardsByVersionId
-		? Array.from(
-				new Set($cardsByVersionId.filter((card) => card.clubId).map((card) => card.clubId))
-			).sort((a, b) => a - b)
-		: [];
+	// $: clubIds = $cardsByVersionId
+	// 	? Array.from(
+	// 			new Set($cardsByVersionId.filter((card) => card.clubId).map((card) => card.clubId))
+	// 		).sort((a, b) => a - b)
+	// 	: [];
 </script>
 
 {@render children()}
 
 <section class="absolute flex justify-center bottom-0 w-full backdrop-blur-3xl backdrop-grayscale-35 left-1/2 -translate-x-1/2 h-28">
+	<PlayerSearch {cardVersion}/>
 
-	<PaginationNav {currentPage} {totalPages}/>
-
+	<PaginationNav {currentPage} {totalPages} {cardVersion}/>
+<!-- 
 	<div class="absolute top-0 left-0 flex gap-2 flex-col">
 		<DropDown
 			bind:_isDropdownOpen
@@ -54,6 +56,6 @@
 			filterEndpoint={'clubId'}
 			coreEndpoint={'clubs'}
 		/>
-	</div>
+	</div> -->
 	<PageSettings {cardVersion}/>
 </section>

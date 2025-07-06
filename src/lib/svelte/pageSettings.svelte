@@ -5,7 +5,7 @@
 
 	let cardScaleSlider;
 	let labelLeft = '0px';
-	let _isSettingsOpen = true;
+	let _isSettingsOpen = false;
 
 	$: if (cardScaleSlider) {
 		const labelWidth = 40,
@@ -39,18 +39,11 @@
 				<div>Karten Größe:</div>
 				<div class="relative ml-2 flex-1">
 					<div
-						class="absolute -top-8 z-0 w-14 rounded bg-amber-500 px-2 py-1 text-xs text-stone-900 shadow transition-all duration-200"
+						class="absolute -top-8 z-0 w-10 text-center rounded bg-amber-500 px-2 py-1 text-xs text-stone-900 shadow transition-all duration-200"
 						style={`left: ${labelLeft};`}
 					>
 						<span class="absolute -z-10 size-6 rotate-45 bg-amber-500"></span>
-						<input
-							type="Number"
-							min="0.01"
-							max="2.00"
-							step="0.01"
-							bind:value={$settingsStore.cardScale}
-							class="w-12"
-						/>
+						{$settingsStore.cardScale.toFixed(2)}
 					</div>
 					<input
 						bind:this={cardScaleSlider}

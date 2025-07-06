@@ -1,6 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --font-sans: 'Inter', sans-serif;
+	--font-sans: 'Inter', sans-serif;
 }
 @import 'tailwindcss';
+
+@theme {
+	--animate-wobble_top: wobble_top 2s ease-in-out 0s 2 normal forwards;
+  --animate-pingCard: pingCard 1s ease-in-out 0s infinite normal forwards;
+@keyframes wobble_top {
+	0%,
+	100% {
+		transform: translateX(0%);
+		transform-origin: 50% 50%;
+	}
+
+	15% {
+		transform: translateX(-30px) rotate(6deg);
+	}
+
+	30% {
+		transform: translateX(15px) rotate(-6deg);
+	}
+
+	45% {
+		transform: translateX(-15px) rotate(3.6deg);
+	}
+
+	60% {
+		transform: translateX(9px) rotate(-2.4deg);
+	}
+
+	75% {
+		transform: translateX(-6px) rotate(1.2deg);
+	}
+}
+}
+
+@keyframes pingCard{
+  0%, 100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+}
