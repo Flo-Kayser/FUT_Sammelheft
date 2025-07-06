@@ -23,4 +23,3 @@ export async function load() {
     return { coreData, additionalCoreData, cards };
 }
 
-export const prerender = true;
