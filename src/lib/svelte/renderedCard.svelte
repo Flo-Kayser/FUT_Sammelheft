@@ -58,7 +58,6 @@
 				</div>
 			</div>
 			<div class="absolute top-[83%] flex w-full scale-125 items-center justify-center gap-2">
-				{console.log(club)}
 				<img src={`https://cdn.easysbc.io/fc25/countries/${nation.eaId}.png`} alt={nation?.slug} class="h-[0.9525em] w-[1.65em]" />
 				<img src={`https://cdn.easysbc.io/fc25/leagues/dark/${league.eaId}.png`} alt={league?.slug} class="ratio-square h-[1.375em]" />
 				{#if !(club?.eaId === 114605 || club?.eaId === 112658)}
