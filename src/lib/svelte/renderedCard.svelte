@@ -33,7 +33,7 @@
 			class={`absolute h-full w-full ${_isImpossible ? 'brightness-50 grayscale-200' : ''} ${_isCollected ? 'opacity-80 grayscale-100' : ''}`}
 		>
 			<img
-				src={cardVersion?.imageUrl}
+				src={`${cardVersion.eaId > 3 ? `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png` : `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_3.png`}`}
 				alt={squadName}
 				class="pointer-events-none absolute -top-8"
 			/>
@@ -58,10 +58,11 @@
 				</div>
 			</div>
 			<div class="absolute top-[83%] flex w-full scale-125 items-center justify-center gap-2">
-				<img src={nation?.imageUrl} alt={nation?.slug} class="h-[0.9525em] w-[1.65em]" />
-				<img src={league?.imageUrl} alt={league?.slug} class="ratio-square h-[1.375em]" />
+				{console.log(club)}
+				<img src={`https://cdn.easysbc.io/fc25/countries/${nation.eaId}.png`} alt={nation?.slug} class="h-[0.9525em] w-[1.65em]" />
+				<img src={`https://cdn.easysbc.io/fc25/leagues/dark/${league.eaId}.png`} alt={league?.slug} class="ratio-square h-[1.375em]" />
 				{#if !(club?.eaId === 114605 || club?.eaId === 112658)}
-					<img src={club?.imageUrl} alt={club?.slug} class="ratio-square h-[1.375em]" />
+					<img src={`https://cdn.easysbc.io/fc25/clubs/dark/${club.eaId}.png`} alt={club?.slug} class="ratio-square h-[1.375em]" />
 				{/if}
 			</div>
 		</div>

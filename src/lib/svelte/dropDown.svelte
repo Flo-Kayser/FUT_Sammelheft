@@ -31,7 +31,7 @@
 		<button class="flex w-10 items-center justify-center" onclick={() => resetCardsFilter()}>
 			{#if $cardsFilter[filterEndpoint]}
 				<img
-					src={`${coreData?.data[coreEndpoint]?.find((d) => d.eaId === $cardsFilter[filterEndpoint])?.imageUrl || coreData?.data[coreEndpoint]?.find((d) => d.eaId === $cardsFilter[filterEndpoint])?.imageUrl}`}
+					src={`https://cdn.easysbc.io/fc25/leagues/dark/${$cardsFilter[filterEndpoint]}.png`}
 					alt=""
 					class="h-8 w-8"
 				/>
@@ -68,6 +68,7 @@
 			>
 
 			{#each idArray as singleId}
+			{console.log(singleId)}
 				<button
 					class="gap-2 border-t-2 pt-2 whitespace-nowrap"
 					onclick={() => {
@@ -83,7 +84,7 @@
 					}}
 				>
 					<img
-						src={`${coreData?.data[coreEndpoint]?.find((d) => d.eaId === singleId)?.imageUrl || coreData?.data[coreEndpoint]?.find((d) => d.eaId === singleId)?.imageUrl}`}
+						src={`https://cdn.easysbc.io/fc25/leagues/dark/${singleId}.png`}
 						alt=""
 						class="h-8 w-8"
 					/>
