@@ -66,12 +66,18 @@
 	<section class="grid grid-cols-3 gap-4 p-8">
 		{#if filteredSquads?.length > 0}
 			{#each filteredSquads as squad}
+			{console.log(squad)}
 				<button
 					onclick={() => goto(`/squads/${squad.slug}/page=1`)}
 					class="flex w-full cursor-pointer items-center px-4 justify-between rounded-lg bg-stone-400/70 py-2 text-white"
 				>
 					<div class="flex items-center gap-2">
-						<img src={squad.compactImageUrl} alt={squad.name} class="w-10" />
+						{#if squad.eaId > 3}
+						<img src={`https://cdn.easysbc.io/fc25/cards/e_${squad.eaId}_0.png`} alt={squad.name} class="w-10" />
+						{:else}
+						<img src={`https://cdn.easysbc.io/fc25/cards/e_${squad.eaId}_3.png`} alt={squad.name} class="w-10" />
+
+						{/if}
 						<div>{squad.name}</div>
 					</div>
 					<div class="mr-2">
