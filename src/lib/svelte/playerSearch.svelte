@@ -15,7 +15,7 @@
 	let matchingPlayerNames = [];
 	let suggestionRefs = [];
 
-	$: playerNames = $sortFilteredCardsByRating.map((card) => card.name);
+	$: playerNames = $sortFilteredCardsByRating?.map((card) => card.name);
 
 	$: matchingPlayerNames =
 		searchTerm.length > 0
