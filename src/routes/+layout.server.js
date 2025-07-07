@@ -1,5 +1,3 @@
-import fs from 'fs/promises';
-
 export async function load() {
     // 1. Hole coreData
     const response = await fetch('https://www.fut.gg/api/fut/25/fut-core-data/');
@@ -15,11 +13,13 @@ export async function load() {
     }
     const additionalCoreData = await additionalResponse.json();
 
-    // 3. Hole cards.json lokal
-    const json = await fs.readFile('static/cards.json', 'utf-8');
-    const cards = JSON.parse(json);
+    // 3. Hole cards.json von GitHub
+    const cardsResponse = await fetch('https://raw.githubusercontent.com/Flo-Kayser/FUTCARDS/refs/heads/main/cards.json');
+    if (!cardsResponse.ok) {
+        throw new Error('Network response was not ok (cards.json)');
+    }
+    const cards = await cardsResponse.json();
 
     // 4. Gib alles gemeinsam zurück
     return { coreData, additionalCoreData, cards };
 }
-
