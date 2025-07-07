@@ -68,7 +68,6 @@
 			>
 
 			{#each idArray as singleId}
-			{console.log(singleId)}
 				<button
 					class="gap-2 border-t-2 pt-2 whitespace-nowrap"
 					onclick={() => {
