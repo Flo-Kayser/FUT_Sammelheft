@@ -7,10 +7,14 @@
 
 	onMount(() => {
 		allCardsStore.set(data.cards);
-		goto('/squads')
 	});
+	if (typeof window !== 'undefined' && window.location.pathname === '/') {
+		goto('/squads');
+	}
 	export let children;
 </script>
 
+<div  style={`background-image: url('/rhs.jpg'); background-size: cover; background-position: 70%; background-repeat: no-repeat; background-attachment: fixed;`}>
 
-{@render children()}
+	{@render children()}
+</div>

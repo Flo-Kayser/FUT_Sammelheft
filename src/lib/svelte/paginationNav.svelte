@@ -38,7 +38,7 @@
 			<!-- Zurück -->
 			<button
 				onclick={()=>goto(`./page=${Math.max(1, Number(currentPage) - 1)}`)}
-				class="rounded border px-3 py-1 hover:brightness-150 curspor-pointer" 
+				class="rounded border px-3 py-1 hover:brightness-150 cursor-pointer" 
 				aria-disabled={Number(currentPage) === 1}
 				style="pointer-events: {Number(currentPage) === 1 ? 'none' : 'auto'}; opacity: {Number(
 					currentPage

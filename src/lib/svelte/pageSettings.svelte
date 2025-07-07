@@ -1,5 +1,6 @@
 <script>
 	import { settingsStore } from '$lib/stores/settings';
+	import { impossibleSwitchStore } from '$lib/stores/smallStores';
 
 	export let cardVersion;
 
@@ -18,13 +19,13 @@
 </script>
 
 <div
-	class={`absolute right-1 bottom-1 flex flex-col items-end rounded-lg border-2 p-2 px-4 text-amber-500 shadow-lg ${
-		_isSettingsOpen ? 'bg-stone-900' : 'bg-transparent'
+	class={`absolute right-1 bottom-1 z-20 flex flex-col items-end rounded-lg border-2  text-amber-500 shadow-lg select-none ${
+		_isSettingsOpen ? 'bg-stone-900 ' : 'h-13 bg-transparent'
 	}`}
 	style={`color: ${_isSettingsOpen ? `` : `#${cardVersion.textColor[0]}`}`}
 >
 	<!-- svelte-ignore a11y_consider_explicit_label -->
-	<button on:click={() => (_isSettingsOpen = !_isSettingsOpen)} class="cursor-pointer">
+	<button on:click={() => (_isSettingsOpen = !_isSettingsOpen)} class="cursor-pointer px-4 py-2">
 		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
 			<path
 				fill="currentColor"
@@ -34,12 +35,12 @@
 	</button>
 
 	<section class={`${_isSettingsOpen ? 'block ' : 'hidden '}  font-bold`}>
-		<div class="mx-auto mt-10 flex w-full max-w-md flex-col gap-2 px-4">
+		<div class="mx-auto mt-10 flex w-full max-w-md flex-col gap-2 px-4 py-2">
 			<div class="relative flex w-full">
 				<div>Karten Größe:</div>
 				<div class="relative ml-2 flex-1">
 					<div
-						class="absolute -top-8 z-0 w-10 text-center rounded bg-amber-500 px-2 py-1 text-xs text-stone-900 shadow transition-all duration-200"
+						class="absolute -top-8 z-0 w-10 rounded bg-amber-500 px-2 py-1 text-center text-xs text-stone-900 shadow transition-all duration-200"
 						style={`left: ${labelLeft};`}
 					>
 						<span class="absolute -z-10 size-6 rotate-45 bg-amber-500"></span>
@@ -52,11 +53,25 @@
 						max="2.00"
 						step="0.01"
 						bind:value={$settingsStore.cardScale}
-						class="h-2 w-full appearance-none rounded-lg bg-gray-300 outline-none"
+						class="h-2 w-48 appearance-none rounded-lg bg-gray-300 outline-none"
+					/>
+				</div>
+				<div>
+					<input
+						type="number"
+						min="0.01"
+						max="2"
+						bind:value={$settingsStore.cardScale}
+						class="ml-2 w-16 rounded border border-gray-300 p-1 text-center text-sm"
+						on:input={(e) => {
+							if (e.target.value > 2) e.target.value = 2;
+							if (e.target.value < 0) e.target.value = 0.01;
+							$settingsStore.cardScale = parseFloat(e.target.value);
+						}}
 					/>
 				</div>
 			</div>
-			<div class="flex w-full justify-between">
+			<div class="flex w-full items-center justify-between">
 				<div>Karten Anzahl pro Seite:</div>
 
 				<div>
@@ -65,9 +80,113 @@
 						min="1"
 						max="100"
 						bind:value={$settingsStore.cardsPerPage}
-						class="ml-2 w-16 rounded border border-gray-300 p-1 text-center"
+						class="ml-2 w-16 rounded border border-gray-300 p-1 text-center text-sm"
 					/>
 				</div>
+			</div>
+
+			<div class="relstve mt-1 border-t-2 border-white py-2 text-sm">
+				<label class="inline-flex cursor-pointer items-center gap-2">
+					<span>Karten sammeln</span>
+					<input
+						type="checkbox"
+						value=""
+						class="peer sr-only"
+						bind:checked={$impossibleSwitchStore}
+					/>
+					<div
+						class="peer relative h-6 w-11 rounded-full bg-amber-500 peer-checked:bg-amber-500 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full"
+					></div>
+
+					<span>Unmögliche Karten markieren</span>
+				</label>
+			</div>
+
+			<div class="flex flex-col gap-2 text-white">
+				<label class="flex w-full items-center justify-between">
+					<div>Gesammelte Karten anzeigen:</div>
+
+					<input
+						type="checkbox"
+						bind:checked={$settingsStore.showCollectedCards}
+						class="peer sr-only"
+					/>
+					<div class="peer relative h-5 w-5 rounded-sm bg-white peer-checked:bg-amber-500">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							class="absolute top-0.5 left-0.5 text-white"
+							><g fill="none" fill-rule="evenodd"
+								><path
+									d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+								/><path
+									fill="currentColor"
+									d="M21.546 5.111a1.5 1.5 0 0 1 0 2.121L10.303 18.475a1.6 1.6 0 0 1-2.263 0L2.454 12.89a1.5 1.5 0 1 1 2.121-2.121l4.596 4.596L19.424 5.111a1.5 1.5 0 0 1 2.122 0"
+									stroke-width="2"
+									stroke="currentColor"
+								/></g
+							></svg
+						>
+					</div>
+				</label>
+				<label class="flex w-full items-center justify-between">
+					<div>Noch Fehlende Karten anzeigen:</div>
+
+					<input
+						type="checkbox"
+						bind:checked={$settingsStore.showUncollectedCards}
+						class="peer sr-only"
+					/>
+					<div class="peer relative h-5 w-5 rounded-sm bg-white peer-checked:bg-amber-500">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							class="absolute top-0.5 left-0.5 text-white"
+							><g fill="none" fill-rule="evenodd"
+								><path
+									d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+								/><path
+									fill="currentColor"
+									d="M21.546 5.111a1.5 1.5 0 0 1 0 2.121L10.303 18.475a1.6 1.6 0 0 1-2.263 0L2.454 12.89a1.5 1.5 0 1 1 2.121-2.121l4.596 4.596L19.424 5.111a1.5 1.5 0 0 1 2.122 0"
+									stroke-width="2"
+									stroke="currentColor"
+								/></g
+							></svg
+						>
+					</div>
+				</label>
+				<label class="flex w-full items-center justify-between">
+					<div>Unmögliche Karten anzeigen:</div>
+
+					<input
+						type="checkbox"
+						bind:checked={$settingsStore.showImpossibleCards}
+						class="peer sr-only"
+					/>
+					<div class="peer relative h-5 w-5 rounded-sm bg-white peer-checked:bg-amber-500">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							class="absolute top-0.5 left-0.5 text-white"
+							><g fill="none" fill-rule="evenodd"
+								><path
+									d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+								/><path
+									fill="currentColor"
+									d="M21.546 5.111a1.5 1.5 0 0 1 0 2.121L10.303 18.475a1.6 1.6 0 0 1-2.263 0L2.454 12.89a1.5 1.5 0 1 1 2.121-2.121l4.596 4.596L19.424 5.111a1.5 1.5 0 0 1 2.122 0"
+									stroke-width="2"
+									stroke="currentColor"
+								/></g
+							></svg
+						>
+					</div>
+				</label>
 			</div>
 		</div>
 	</section>

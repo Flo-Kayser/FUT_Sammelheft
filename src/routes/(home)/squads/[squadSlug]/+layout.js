@@ -8,6 +8,5 @@ export async function load({ params, parent }) {
 	const { coreData } = await parent();
 
 	const versionId = await getVersionIdForSquad(squadSlug, coreData);
-
 	return { squadSlug, versionId };
 }

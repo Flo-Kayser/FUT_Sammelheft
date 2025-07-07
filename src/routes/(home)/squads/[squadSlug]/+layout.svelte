@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { cardsFilter } from '$lib/stores/cards.js';
+	import { cardsByVersionId, cardsFilter } from '$lib/stores/cards.js';
+	import { collectedCardsStore, impossibleCardsStore } from '$lib/stores/collectionStore.js';
 	import { resetCardsFilter } from '$lib/Utils.js';
 
 	let { data, children } = $props();
@@ -23,6 +24,7 @@
 		<button
 			onclick={() => {
 				resetCardsFilter();
+				
 				goto('/squads');
 			}}
 			class="absolute top-3 left-3 cursor-pointer rounded-md px-2 py-1 font-bold shadow-xl transition duration-300 hover:brightness-80 active:scale-95"
@@ -31,6 +33,14 @@
 		>
 
 		<h1 class="text-center text-5xl font-black">{squadSlug?.toUpperCase()}</h1>
+		<div
+			class="absolute top-3 right-3 w-max rounded-md px-2 py-1 text-3xl font-black"
+			style={`background-color:#${cardVersion?.textColor[0]}; color: #${cardVersion?.lineColor[0]}`}
+		>
+			{($collectedCardsStore[data?.versionId]?.length ?? 0) +
+				($impossibleCardsStore[data?.versionId]?.length ?? 0)} / {$cardsByVersionId?.length ?? 0}
+		</div>
+
 		{@render children()}
 	</div>
 </div>

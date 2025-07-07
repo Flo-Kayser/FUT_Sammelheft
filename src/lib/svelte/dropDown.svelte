@@ -7,8 +7,8 @@
 	export let _isDropdownOpen;
 </script>
 
-<div class="z-10 flex h-10 w-18 border">
-	<div class="flex h-full items-center justify-between">
+<div class="absolute right-20 bottom-1 z-10 flex h-13 w-18 rounded-lg border-2">
+	<div class="flex h-full items-center justify-between *:cursor-pointer">
 		<button
 			aria-label="Toggle dropdown"
 			onclick={() => {
@@ -19,7 +19,7 @@
 				}
 				_isDropdownOpen[coreEndpoint] = !_isDropdownOpen[coreEndpoint];
 			}}
-			><div class={`${_isDropdownOpen[coreEndpoint] ? 'rotate-90' : ''} transition-transform`}>
+			><div class={`${_isDropdownOpen[coreEndpoint] ? '-rotate-90' : ''} transition-transform`}>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 					><path
 						fill="currentColor"
@@ -31,7 +31,7 @@
 		<button class="flex w-10 items-center justify-center" onclick={() => resetCardsFilter()}>
 			{#if $cardsFilter[filterEndpoint]}
 				<img
-					src={`${coreData?.data[coreEndpoint]?.find((d) => d.eaId === $cardsFilter[filterEndpoint])?.imageLightUrl || coreData?.data[coreEndpoint]?.find((d) => d.eaId === $cardsFilter[filterEndpoint])?.imageUrl}`}
+					src={`${coreData?.data[coreEndpoint]?.find((d) => d.eaId === $cardsFilter[filterEndpoint])?.imageUrl || coreData?.data[coreEndpoint]?.find((d) => d.eaId === $cardsFilter[filterEndpoint])?.imageUrl}`}
 					alt=""
 					class="h-8 w-8"
 				/>
@@ -47,12 +47,14 @@
 	</div>
 	{#if _isDropdownOpen[coreEndpoint]}
 		<div
-			class="absolute top-[112%] right-1 flex h-96 w-max flex-col gap-2 overflow-y-scroll bg-gray-400 p-2 *:flex *:cursor-pointer *:items-center"
+			class="absolute right-0 bottom-[112%] flex h-96 w-max flex-col gap-2 overflow-y-scroll bg-stone-900 p-2 text-amber-500 *:flex *:cursor-pointer *:items-center [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-amber-600 [&::-webkit-scrollbar-track]:bg-stone-600"
 		>
 			<button
 				class="gap-2 py-1 pl-1 font-bold"
 				onclick={() => {
 					resetCardsFilter();
+					_isDropdownOpen[coreEndpoint] = false;
+
 					goto('./page=1');
 				}}
 			>
@@ -72,14 +74,16 @@
 						goto('./page=1');
 						if ($cardsFilter[filterEndpoint] === singleId) {
 							resetCardsFilter();
+							_isDropdownOpen[coreEndpoint] = false;
 							return;
 						} else {
 							cardsFilter.update((f) => ({ ...f, [filterEndpoint]: singleId }));
+							_isDropdownOpen[coreEndpoint] = false;
 						}
 					}}
 				>
 					<img
-						src={`${coreData?.data[coreEndpoint]?.find((d) => d.eaId === singleId)?.imageLightUrl || coreData?.data[coreEndpoint]?.find((d) => d.eaId === singleId)?.imageUrl}`}
+						src={`${coreData?.data[coreEndpoint]?.find((d) => d.eaId === singleId)?.imageUrl || coreData?.data[coreEndpoint]?.find((d) => d.eaId === singleId)?.imageUrl}`}
 						alt=""
 						class="h-8 w-8"
 					/>

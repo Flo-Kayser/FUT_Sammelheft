@@ -1,29 +1,33 @@
-import { writable, derived, get } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-const STORAGE_KEY = 'collectedCards';
+const STORAGE_KEYS = {
+	collected: 'collectedCards',
+	impossible: 'impossibleCards'
+};
 
-export const collectedCardsStore = writable({});
+function createPersistentStore(key) {
+	const initial = browser
+		? JSON.parse(localStorage.getItem(key) || '{}')
+		: {};
 
-collectedCardsStore.update(() => {
+	const store = writable(initial);
+
 	if (browser) {
-		const storedData = localStorage.getItem(STORAGE_KEY);
-		return storedData && Object.keys(storedData).length > 0 ? JSON.parse(storedData) : {};
+		store.subscribe((value) => {
+			localStorage.setItem(key, JSON.stringify(value));
+		});
 	}
-});
 
-collectedCardsStore.subscribe((value) => {
-	if (browser) {
-		localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
-	}
-});
+	return store;
+}
 
+export const collectedCardsStore = createPersistentStore(STORAGE_KEYS.collected);
+export const impossibleCardsStore = createPersistentStore(STORAGE_KEYS.impossible);
 
-export function toggleCard(versionId, resourceId) {
+export function toggleCard(store, versionId, resourceId) {
 	let result;
-	let updatedMap;
-
-	collectedCardsStore.update((map) => {
+	store.update((map) => {
 		const currentSet = new Set(map[versionId] ?? []);
 		if (currentSet.has(resourceId)) {
 			currentSet.delete(resourceId);
@@ -32,13 +36,10 @@ export function toggleCard(versionId, resourceId) {
 			currentSet.add(resourceId);
 			result = false;
 		}
-
-		updatedMap = {
+		return {
 			...map,
 			[versionId]: [...currentSet]
 		};
-		return updatedMap;
 	});
-
 	return result;
 }

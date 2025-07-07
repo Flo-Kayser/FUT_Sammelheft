@@ -10,7 +10,11 @@ function getInitialSettings() {
 			const parsed = storedData ? JSON.parse(storedData) : {};
 			return {
 				cardsPerPage: parsed.cardsPerPage ?? 20,
-				cardScale: parsed.cardScale ?? '0.75'
+				cardScale: parsed.cardScale ?? 0.75,
+
+				showCollectedCards: parsed.showCollectedCards ?? true,
+				showUncollectedCards: parsed.showUncollectedCards ?? true,
+				showImpossibleCards: parsed.showImpossibleCards ?? true,
 			};
 		} catch (err) {
 			console.error('Fehler beim Laden der Einstellungen:', err);
@@ -18,7 +22,10 @@ function getInitialSettings() {
 	}
 	return {
 		cardsPerPage: 20,
-		cardScale: 0.75
+		cardScale: 0.75,
+		showCollectedCards: true,
+		showUncollectedCards: true,
+		showImpossibleCards: true,
 	};
 }
 
