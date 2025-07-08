@@ -11,6 +11,7 @@ function getInitialSettings() {
 			return {
 				cardsPerPage: parsed.cardsPerPage ?? 20,
 				cardScale: parsed.cardScale ?? 0.75,
+				globalCounterWithBaseCards: parsed.globalCounter ?? false,
 
 				showCollectedCards: parsed.showCollectedCards ?? true,
 				showUncollectedCards: parsed.showUncollectedCards ?? true,
@@ -23,6 +24,7 @@ function getInitialSettings() {
 	return {
 		cardsPerPage: 20,
 		cardScale: 0.75,
+		globalCounterWithBaseCards: false,
 		showCollectedCards: true,
 		showUncollectedCards: true,
 		showImpossibleCards: true,

@@ -87,7 +87,7 @@
 				</div>
 			</div>
 
-			<div class="relstve mt-1 border-t-2 border-white py-2 text-sm">
+			<div class="mt-1 border-t-2 border-white py-2 text-sm">
 				<label class="inline-flex cursor-pointer items-center gap-2">
 					<span>Karten sammeln</span>
 					<input

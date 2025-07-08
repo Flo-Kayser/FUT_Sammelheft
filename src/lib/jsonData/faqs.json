@@ -1,0 +1,43 @@
+[
+	{
+		"question": "Was ist das FUT-Sammelheft?",
+		"answer": "Das FUT-Sammelheft ist eine nützliche Ergänzung für deine EA Sports Ultimate Team-Erfahrung. Es verschafft dir einen klaren Überblick über die Karten, die du bereits gesammelt hast, sowie über diejenigen, die dir noch fehlen."
+	},
+
+	{
+		"question": "Wie funktioniert das FUT-Sammelheft?",
+		"answer": "In der Squadübersicht des FUT Sammelhefts findest du alle verschiedenen Kartentypen des aktuellen EA FC-Spiels. Von dort kannst du gezielt in die Übersicht eines bestimmten Kartentyps wechseln und deine gesammelten Karten per Klick hinzufügen. So behältst du jederzeit den Überblick über deine Sammlung und siehst, welche Karten dir noch fehlen."
+	},
+	{
+		"question": "Wie entferne ich versehentlich hinzugefügte Karten?",
+		"answer": "Klicke auf die Karte, die du versehentlich hinzugefügt hast. Bestätige die Nachfrage, ob du sie wirklich entfernen möchtest. Die Karte wird daraufhin aus deiner Sammlung entfernt und kann jederzeit erneut hinzugefügt werden."
+	},
+	{
+		"question": "Wie speichere ich meine gesammelten Karten im FUT-Sammelheft?",
+		"answer": "Deine gesammelten Karten werden automatisch im Browser gespeichert – du musst nichts manuell sichern. Wenn du jedoch das Gerät oder den Browser wechselst, kannst du deine Sammlung über eine Export/Import-Funktion sichern. Mehr dazu findest du in 'Mein Bereich' unter 'Sammelheft Sicherheitskopie'."
+	},
+	{
+		"question": "Gibt es eine Suchfunktion, um einen bestimmten Spieler in der Kartentypübersicht zu finden?",
+		"answer": "Ja, es gibt eine Suchfunktion. Du findest sie unten links in der Kartentypübersicht. Wichtig: Falls du vorher eine Liga ausgewählt hast, musst du diese zuerst zurücksetzen, damit du Spieler ausherhalb dieser Liga finden kannst."
+	},
+	{
+		"question": "Wie filtere ich in der Kartentypübersicht nach bestimmten Ligen?",
+		"answer": "Öffne den Liga-Filter über den kleinen Pfeil unten rechts in der Kartentypübersicht. Dort kannst du nach der gewünschten Liga suchen, wobei du sie durch Anklicken auswählst. Wenn die gesuchte Liga nicht in der Liste erscheint, gibt es für diese Liga keine Karten dieses Typs."
+	},
+	{
+		"question": "Wie setze ich eine ausgewählte Liga zurück?",
+		"answer": "Klicke dazu einfach auf das Logo der Liga im Ligafilter oder erneut auf den Liganamen im ausgeklappten Filtermenü. Dadurch wird deine Auswahl aufgehoben und du siehst wieder alle Spieler aus allen Ligen des Kartentyps."
+	},
+	{
+		"question": "Wie kann ich die Kartengröße oder die Anzahl der angezeigten Karten pro Seite ändern?",
+		"answer": "Nutze dafür die Einstellungsmöglichkeiten unten rechts in der Kartentypübersicht. Dort kannst du die Kartengröße anpassen und die Anzahl der Karten pro Seite festlegen."
+	},
+	{
+		"question": "Was passiert, wenn ich mich zwischen zwei Karten entscheiden muss, sodass ich nur eine sammeln kann. Gibt es dafür eine Lösung?",
+		"answer": "Ja, du kannst Karten, die du nicht sammeln kannst, als ‚unmöglich‘ markieren. Nutze dazu unten rechts in der Kartentypübersicht die Einstellungsmöglichkeiten und schalte die Option ‚Karten sammeln‘ auf ‚Unmögliche Karten markieren‘ um. In diesem Modus kannst du die entsprechenden Karten auswählen. Sie werden dann in der Übersicht mit einem ‚Impossible‘-Label gekennzeichnet"
+	},
+	{
+		"question": "Ich möchte nur die fehlenden Karten sehen. Wie mache ich das?",
+		"answer": "Nutze dafür die Einstellungsmöglichkeiten unten rechts in der Kartentypübersicht. Dort kannst du auswählen, welche Karten angezeigt werden sollen."
+	}
+]
