@@ -1,6 +1,7 @@
 <script>
 	import { settingsStore } from '$lib/stores/settings';
 	import { resolveClub } from '$lib/Utils.js';
+	import PlayStyleIcons from '$lib/playStyleIcons.svelte';
 	export let card, cardVersion, squadName, core, additionalCoreData, _isImpossible, _isCollected;
 	let club;
 
@@ -26,7 +27,7 @@
 
 <div class="relative overflow-hidden" style="width: {320 * scale}px; height: {400 * scale}px;">
 	<div
-		class={`absolute top-0 left-0 origin-top-left `}
+		class={`relative top-0 left-0 origin-top-left `}
 		style="transform: scale({scale}); width: 320px; height: 400px;"
 	>
 		<div
@@ -58,14 +59,93 @@
 				</div>
 			</div>
 			<div class="absolute top-[83%] flex w-full scale-125 items-center justify-center gap-2">
-				<img src={`https://cdn.easysbc.io/fc25/countries/${nation.eaId}.png`} alt={nation?.slug} class="h-[0.9525em] w-[1.65em]" />
-				<img src={`https://cdn.easysbc.io/fc25/leagues/dark/${league.eaId}.png`} alt={league?.slug} class="ratio-square h-[1.375em]" />
+				<img
+					src={`https://cdn.easysbc.io/fc25/countries/${nation.eaId}.png`}
+					alt={nation?.slug}
+					class="h-[0.9525em] w-[1.65em]"
+				/>
+				<img
+					src={`https://cdn.easysbc.io/fc25/leagues/dark/${league.eaId}.png`}
+					alt={league?.slug}
+					class="ratio-square h-[1.375em]"
+				/>
 				{#if !(club?.eaId === 114605 || club?.eaId === 112658)}
-					<img src={`https://cdn.easysbc.io/fc25/clubs/dark/${club.eaId}.png`} alt={club?.slug} class="ratio-square h-[1.375em]" />
+					<img
+						src={`https://cdn.easysbc.io/fc25/clubs/dark/${club.eaId}.png`}
+						alt={club?.slug}
+						class="ratio-square h-[1.375em]"
+					/>
 				{/if}
 			</div>
-		</div>
+			{#if $settingsStore.showPlayStylePlus}
+				<div
+					class={`absolute left-[5%] flex flex-col gap-0.5 ${
+						card?.playStylesPlus?.length === 1
+							? 'top-[52%]'
+							: card?.playStylesPlus?.length === 2
+								? 'top-[42%]'
+								: card?.playStylesPlus?.length === 3
+									? 'top-[42%]'
+									: card?.playStylesPlus?.length === 4
+										? 'top-[40%]'
+										: card?.playStylesPlus?.length === 5
+											? 'top-[36%]'
+											: 'top-[30%]'
+					}`}
+				>
+					{#each card?.playStylesPlus as playStylePlusId}
+						<PlayStyleIcons
+							playStyleId={playStylePlusId}
+							lineColor={cardVersion?.textColor[0]}
+							bgColor={cardVersion?.lineColor[0]}
+							class="size-8"
+						/>
+					{/each}
+				</div>
+			{/if}
 
+			{#if $settingsStore.showPossiblePositions}
+				<div class="absolute top-[24%] right-[3%] flex scale-y-[1.2] flex-col gap-1">
+					{#each card?.possiblePositions.filter((pos) => pos !== card?.preferredPosition) as position}
+						<div
+							style={`color: #${cardVersion?.textColor[0]}; background-color: #${cardVersion?.lineColor[0]}`}
+							class="w-11 rounded-md border-2 text-center text-sm font-semibold"
+						>
+							{position}
+						</div>
+					{/each}
+				</div>
+			{/if}
+
+			{#if $settingsStore.showSkillMoves}
+				<div class="absolute top-[56.5%] right-[3%] flex flex-col gap-1">
+					<div
+						style={`color: #${cardVersion?.textColor[0]}; background-color: #${cardVersion?.lineColor[0]}`}
+						class="w-11 rounded-md border-2 text-center text-sm font-semibold"
+					>
+						{card?.preferredFoot.split('')[0]}
+					</div>
+					<div
+						style={`color: #${cardVersion?.textColor[0]}; background-color: #${cardVersion?.lineColor[0]}`}
+						class="flex w-11 items-center justify-center rounded-md border-2 text-sm font-semibold"
+					>
+						<span class="scale-y-[1.2]">{card?.skillMoves}</span>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							class="size-3"
+							viewBox="0 0 24 24"
+							><path
+								fill="currentColor"
+								d="m12 16.102l-3.63 2.192q-.16.079-.297.064q-.136-.016-.265-.094q-.13-.08-.196-.226t-.012-.319l.966-4.11l-3.195-2.77q-.135-.11-.178-.263t.019-.293t.165-.23q.104-.087.28-.118l4.216-.368l1.644-3.892q.068-.165.196-.238T12 5.364t.288.073t.195.238l1.644 3.892l4.215.368q.177.03.281.119q.104.088.166.229q.061.14.018.293t-.178.263l-3.195 2.77l.966 4.11q.056.171-.011.318t-.197.226q-.128.08-.265.095q-.136.015-.296-.064z"
+							/></svg
+						>
+						<span class="scale-y-[1.2]">{card?.weakFoot}</span>
+					</div>
+				</div>
+			{/if}
+		</div>
 		{#if _isImpossible}
 			<div
 				style={`color: #${cardVersion?.textColor[0]}; background-color: #${cardVersion?.lineColor[0]}`}

@@ -16,6 +16,10 @@ function getInitialSettings() {
 				showCollectedCards: parsed.showCollectedCards ?? true,
 				showUncollectedCards: parsed.showUncollectedCards ?? true,
 				showImpossibleCards: parsed.showImpossibleCards ?? true,
+
+				showPlayStylePlus: parsed.showPlayStylePlus ?? true,
+				showPossiblePositions: parsed.showPossiblePositions ?? true,
+				showSkillMoves: parsed.showSkillMoves ?? true,
 			};
 		} catch (err) {
 			console.error('Fehler beim Laden der Einstellungen:', err);
@@ -28,6 +32,10 @@ function getInitialSettings() {
 		showCollectedCards: true,
 		showUncollectedCards: true,
 		showImpossibleCards: true,
+		
+		showPlayStylePlus: true,
+		showPossiblePositions: true,
+		showSkillMoves: true,
 	};
 }
 
