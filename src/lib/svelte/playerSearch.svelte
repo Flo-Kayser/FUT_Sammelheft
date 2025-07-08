@@ -29,7 +29,6 @@
 
 	$: displayedValue = hoveredName !== null ? hoveredName : searchTerm;
 
-	// Scroll aktives Element in Sicht
 	$: {
 		if (selectedSuggestionIndex >= 0 && suggestionRefs[selectedSuggestionIndex]) {
 			suggestionRefs[selectedSuggestionIndex].scrollIntoView({

@@ -90,7 +90,7 @@
 							class="w-10"
 						/>
 					{/if}
-					<div>{squad.name}</div>
+					<div class="text-start">{squad.name}</div>
 				</div>
 				<div class="mr-2">
 					{($collectedCardsStore[squad?.eaId]?.length ?? 0) +
