@@ -26,7 +26,11 @@ export const cardsByVersionId = derived(
 export const filteredCards = derived(
 	[cardsByVersionId, cardsFilter, settingsStore, collectedCardsStore, impossibleCardsStore],
 	([$cardsByVersionId, $cardsFilter, $settings, $collectedCards, $impossibleCards]) => {
+		const seen = new Set();
 		return $cardsByVersionId.filter((card) => {
+			if (seen.has(card.resourceId)) return false;
+			seen.add(card.resourceId);
+
 			const leagueMatches =
 				!$cardsFilter.leagueId || card.leagueId === Number($cardsFilter.leagueId);
 
@@ -46,6 +50,7 @@ export const filteredCards = derived(
 		});
 	}
 );
+
 
 export const sortFilteredCardsByRating = derived(
 	[filteredCards, cardsFilter],
