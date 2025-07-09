@@ -38,7 +38,7 @@
 			<!-- Zurück -->
 			<button
 				onclick={()=>goto(`./page=${Math.max(1, Number(currentPage) - 1)}`)}
-				class="rounded border px-3 py-1 hover:brightness-150 cursor-pointer" 
+				class="rounded border px-3 py-1 hover:brightness-150 cursor-none" 
 				aria-disabled={Number(currentPage) === 1}
 				style="pointer-events: {Number(currentPage) === 1 ? 'none' : 'auto'}; opacity: {Number(
 					currentPage
@@ -58,7 +58,7 @@
 				<button
 					onclick={()=>goto(`./page=${page}`)}
 					style={`${Number(currentPage) === page ? `background-color: #${cardVersion?.lineColor[0]}`:''}`}
-					class="rounded border w-10 py-1 text-center hover:brightness-150 cursor-pointer"
+					class="rounded border w-10 py-1 text-center hover:brightness-150 cursor-none"
 
 					
 				>
@@ -69,7 +69,7 @@
 			<!-- Weiter -->
 			<button
 				onclick={()=>goto(`./page=${Math.min(Number(currentPage) + 1, totalPages)}`)}
-				class="rounded border  px-3 py-1 hover:brightness-150 cursor-pointer"
+				class="rounded border  px-3 py-1 hover:brightness-150 cursor-none"
 				aria-disabled={currentPage >= totalPages}
 				style="pointer-events: {currentPage >= totalPages
 					? 'none'

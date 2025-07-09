@@ -74,7 +74,7 @@
 		{#each filteredSquads as squad}
 			<button
 				onclick={() => goto(`/squads/${squad.slug}/page=1`)}
-				class="flex w-full cursor-pointer items-center justify-between rounded-lg bg-stone-400/70 px-4 py-2 text-white"
+				class="flex w-full cursor-pointer items-center justify-between rounded-lg bg-stone-400/70 px-4 py-2 text-white hover:bg-stone-500/60 transition duration-300 active:scale-95"
 			>
 				<div class="flex items-center gap-2">
 					{#if squad.eaId > 3}

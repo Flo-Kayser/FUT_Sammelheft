@@ -2,7 +2,8 @@
 	import { settingsStore } from '$lib/stores/settings';
 	import { resolveClub } from '$lib/Utils.js';
 	import PlayStyleIcons from '$lib/playStyleIcons.svelte';
-	export let card, cardVersion, squadName, core, additionalCoreData, _isImpossible, _isCollected;
+
+	export let card, cardVersion, core, additionalCoreData, _isImpossible, _isCollected;
 	let club;
 
 	let scale;
@@ -32,10 +33,11 @@
 	>
 		<div
 			class={`absolute h-full w-full ${_isImpossible ? 'brightness-50 grayscale-200' : ''} ${_isCollected ? 'opacity-80 grayscale-100' : ''}`}
+			style={`color: #${cardVersion?.textColor[0]};`}
 		>
 			<img
 				src={`${cardVersion.eaId > 3 ? `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png` : `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_3.png`}`}
-				alt={squadName}
+				alt={cardVersion.eaId}
 				class="pointer-events-none absolute -top-8"
 			/>
 			<img
@@ -43,7 +45,10 @@
 				alt={card?.cardName}
 				class={`pointer-events-none absolute ${card?.hasDynamicImage ? '-top-7 w-full' : 'top-1/7 right-8 w-3/5'}`}
 			/>
-			<div class="absolute top-[20%] left-[21%] -translate-x-1/2 scale-125 text-center">
+			<div
+				class="absolute top-[20%] left-[21%] -translate-x-1/2 scale-125 text-center"
+				style={`color: #${cardVersion?.textColor[0]};`}
+			>
 				<div class="scale-y-[1.2] text-[1.73em] font-[800]">{card?.rating}</div>
 				<div class="mt-0.5 scale-y-[1.2] text-[0.83em] font-bold">{card?.preferredPosition}</div>
 			</div>

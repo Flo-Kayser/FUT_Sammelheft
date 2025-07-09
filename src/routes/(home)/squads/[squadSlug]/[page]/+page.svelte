@@ -108,14 +108,14 @@
 
 <section class="px-8 pt-8">
 	{#if paginatedCards?.length > 0}
-		<div class="flex flex-wrap items-center gap-x-2">
+		<div class="flex flex-wrap items-center gap-x-2 cursor-none">
 			{#each paginatedCards as card, i}
 				<button
 					on:click={() => ($impossibleSwitchStore? toggleImpossibleState(i) : toggleCollectionState(i))}
-					class={`cursor-pointer   ${card.resourceId === localHighlightedId ? 'animate-pingCard' : ''}`}
+					class={`cursor-none  ${card.resourceId === localHighlightedId ? 'animate-pingCard' : ''}`}
 					style={`color: #${cardVersion?.textColor[0]}`}
 				>
-					<RenderedCard {card} {cardVersion} {squadName} {core} {additionalCoreData} _isImpossible={!isNotImpossible[i]} _isCollected={isUncollected[i]}/>
+					<RenderedCard {card} {cardVersion} {core} {additionalCoreData} _isImpossible={!isNotImpossible[i]} _isCollected={isUncollected[i]}/>
 				</button>
 			{/each}
 		</div>

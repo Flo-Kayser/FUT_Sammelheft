@@ -10,6 +10,12 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 
+	import { spring } from 'svelte/motion';
+	const mouseCoords = spring({ x: 0, y: 0 });
+	const onMouseMove = (event) => {
+		$mouseCoords = { x: event.x, y: event.y };
+	};
+
 	export let data;
 	export let children;
 
@@ -54,10 +60,13 @@
 		: [];
 </script>
 
+<svelte:window on:mousemove={onMouseMove} />
+<!-- svelte-ignore element_invalid_self_closing_tag -->
+<div class="cursor" style:--x={`${$mouseCoords.x}px`} style:--y={`${$mouseCoords.y}px`} />
 {@render children()}
 
 <section
-	class="absolute bottom-0 left-1/2 flex h-28 w-full -translate-x-1/2 justify-center bg-stone-800/60"
+	class="absolute bottom-0 left-1/2 flex h-28 w-full -translate-x-1/2 cursor-none justify-center bg-stone-800/60"
 >
 	<PlayerSearch {cardVersion} bind:inputRef={searchInput} />
 
@@ -73,3 +82,21 @@
 
 	<PageSettings {cardVersion} />
 </section>
+
+<style>
+	.cursor {
+		position: absolute;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		z-index: 1000;
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+
+		background: #ffffff;
+		background: radial-gradient(circle, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0) 88%);
+
+		transform: translate(-50%, -50%) translate(var(--x, 0px), var(--y, 0px));
+	}
+</style>
