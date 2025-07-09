@@ -8,6 +8,9 @@
 	import { highlightedCardStore, impossibleSwitchStore } from '$lib/stores/smallStores.js';
 	import { onDestroy } from 'svelte';
 
+
+	import videoUrl from '$lib/assets/videos/New_Card_Unlocked_6.webm';
+
 	export let data;
 
 	let videoElement;
@@ -165,7 +168,7 @@
 		}}
 		class="fixed -top-20 left-0 h-screen w-screen object-fill opacity-0 transition-opacity duration-500"
 	>
-		<source src="/src/lib/assets/videos/New_Card_Unlocked_6.webm" type="video/webm" />
+		<source src={videoUrl} type="video/webm" />
 		Dein Browser unterstützt das Video-Tag nicht.
 	</video>
 {/if}

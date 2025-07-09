@@ -2,6 +2,8 @@
 	import { settingsStore } from '$lib/stores/settings';
 	import { downloadBackup } from '$lib/backupFunctions/downloadBackup';
 	import { handleUploadBackup } from '$lib/backupFunctions/uploadBackup';
+
+	
 </script>
 
 <div class="mx-auto mt-10 max-w-4xl rounded-lg bg-stone-500/50 px-6 py-12">
