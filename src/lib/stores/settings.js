@@ -20,6 +20,8 @@ function getInitialSettings() {
 				showPlayStylePlus: parsed.showPlayStylePlus ?? true,
 				showPossiblePositions: parsed.showPossiblePositions ?? true,
 				showSkillMoves: parsed.showSkillMoves ?? true,
+
+				playAnimationOnCardCollect : parsed.playAnimationOnCardCollect ?? false,
 			};
 		} catch (err) {
 			console.error('Fehler beim Laden der Einstellungen:', err);
@@ -36,6 +38,8 @@ function getInitialSettings() {
 		showPlayStylePlus: true,
 		showPossiblePositions: true,
 		showSkillMoves: true,
+
+		playAnimationOnCardCollect: false,
 	};
 }
 

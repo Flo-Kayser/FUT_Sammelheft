@@ -28,20 +28,15 @@
 				<span>Mit Basic Karten</span>
 			</label>
 		</div>
-		<div class="gap-4 flex flex-col pt-2 pb-40">
+		<div class="flex flex-col gap-4 pt-2 pb-40">
 			<div class="px-2 text-lg text-stone-900">
 				Wähle aus, welche Infos auf deinen Karten angezeigt werden:
 			</div>
 			<div class="pl-8 text-black">
-				{#each [{ label: 'PlayStyles:', key: 'showPlayStylePlus' }, { label: 'Alternativpositionen:', key: 'showPossiblePositions' }, { label: 'Skill Moves und Schwacher Fuß:', key: 'showSkillMoves' }] as item}
-					<label class="flex w-1/2 items-center justify-between gap-2 font-bold">
+				{#each [{ label: 'PlayStyles:', key: 'showPlayStylePlus' }, { label: 'Alternativpositionen:', key: 'showPossiblePositions' }, { label: 'Skill Moves und Schwacher Fuß:', key: 'showSkillMoves' }, { label: 'Animation abspielen beim freischalten der Karte', key: 'playAnimationOnCardCollect' }] as item}
+					<label class="flex w-full items-center justify-between gap-2 font-bold">
 						<div>{item.label}</div>
-						<input
-							type="checkbox"
-							bind:checked={$settingsStore[item.key]}
-							class="peer sr-only"
-							on:input={() => goto('./page=1')}
-						/>
+						<input type="checkbox" bind:checked={$settingsStore[item.key]} class="peer sr-only" />
 						<div class="peer relative h-5 w-5 rounded-sm bg-white peer-checked:bg-amber-500">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
