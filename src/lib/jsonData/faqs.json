@@ -1,12 +1,12 @@
 [
 	{
 		"question": "Was ist das FUT-Sammelheft?",
-		"answer": "Das FUT-Sammelheft ist eine nützliche Ergänzung für deine EA Sports Ultimate Team-Erfahrung. Es verschafft dir einen klaren Überblick über die Karten, die du bereits gesammelt hast, sowie über diejenigen, die dir noch fehlen."
+		"answer": "Das FUT-Sammelheft ist eine nützliche Ergänzung für deine Ultimate Team-Erfahrung. Es verschafft dir einen klaren Überblick über die Karten, die du bereits gesammelt hast, sowie über diejenigen, die dir noch fehlen."
 	},
 
 	{
 		"question": "Wie funktioniert das FUT-Sammelheft?",
-		"answer": "In der Squadübersicht des FUT Sammelhefts findest du alle verschiedenen Kartentypen des aktuellen EA FC-Spiels. Von dort kannst du gezielt in die Übersicht eines bestimmten Kartentyps wechseln und deine gesammelten Karten per Klick hinzufügen. So behältst du jederzeit den Überblick über deine Sammlung und siehst, welche Karten dir noch fehlen."
+		"answer": "In der Squadübersicht des FUT Sammelhefts findest du alle verschiedenen Kartentypen des aktuellen Ultimate Team Jahres. Von dort kannst du gezielt in die Übersicht eines bestimmten Kartentyps wechseln und deine gesammelten Karten per Klick hinzufügen. So behältst du jederzeit den Überblick über deine Sammlung und siehst, welche Karten dir noch fehlen."
 	},
 	{
 		"question": "Wie entferne ich versehentlich hinzugefügte Karten?",
@@ -14,7 +14,7 @@
 	},
 	{
 		"question": "Wie speichere ich meine gesammelten Karten im FUT-Sammelheft?",
-		"answer": "Deine gesammelten Karten werden automatisch im Browser gespeichert – du musst nichts manuell sichern. Wenn du jedoch das Gerät oder den Browser wechselst, kannst du deine Sammlung über eine Export/Import-Funktion sichern. Mehr dazu findest du in 'Mein Bereich' unter 'Sammelheft Sicherheitskopie'."
+		"answer": "Deine gesammelten Karten werden automatisch im Browser gespeichert – du musst nichts selbst sichern. Wenn du jedoch dein Gerät oder den Browser wechselst oder deine Browserdaten löschst, kann deine Sammlung verloren gehen. Über die Export-/Import-Funktion kannst du sie daher als Sicherheitskopie sichern. Mehr dazu findest du in ‚Mein Bereich‘ unter ‚Sammelheft-Sicherheitskopie‘."
 	},
 	{
 		"question": "Gibt es eine Suchfunktion, um einen bestimmten Spieler in der Kartentypübersicht zu finden?",
