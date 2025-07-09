@@ -12,6 +12,10 @@
 		goto('/squads');
 	}
 	export let children;
+
+	import { inject } from '@vercel/analytics';
+
+  inject();
 </script>
 
 <div  style={`background-image: url('/rhs.jpg'); background-size: cover; background-position: 70%; background-repeat: no-repeat; background-attachment: fixed;`} class="min-h-screen">
