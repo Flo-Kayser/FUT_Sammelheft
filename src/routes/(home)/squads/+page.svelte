@@ -29,8 +29,6 @@
 	});
 </script>
 
-
-
 <section class="h-40 text-black brightness-150">
 	<div class="flex h-full items-center justify-center">
 		<h1 class="text-4xl font-bold">EA SPORTS FC 25 FUT-SAMMELHEFT</h1>
@@ -51,8 +49,10 @@
 		Gesammelt:
 		{#if $settingsStore.globalCounterWithBaseCards}
 			<span>
-				{Object.values($collectedCardsStore)?.reduce((acc, curr) => acc + curr.length, 0) +
-					Object.values($impossibleCardsStore)?.reduce((acc, curr) => acc + curr.length, 0)} / {$allCardsStore?.length}
+				{Object.values($collectedCardsStore).reduce((acc, arr) => acc + (arr?.length ?? 0), 0) +
+					Object.values($impossibleCardsStore).reduce((acc, arr) => acc + (arr?.length ?? 0), 0)}
+				/
+				{Array.from(new Map($allCardsStore.map((card) => [card.resourceId, card])).values()).length}
 			</span>
 		{:else}
 			<span>
@@ -63,7 +63,13 @@
 						.filter(([versionId]) => versionId !== '0' && versionId !== '1')
 						.reduce((sum, [, arr]) => sum + (arr?.length ?? 0), 0)}
 				/
-				{$allCardsStore.filter((card) => card.versionId !== 0 && card.versionId !== 1).length}
+				{Array.from(
+					new Map(
+						$allCardsStore
+							.filter((card) => card.versionId !== 0 && card.versionId !== 1)
+							.map((card) => [card.resourceId, card])
+					).values()
+				).length}
 			</span>
 		{/if}
 	</div>
@@ -74,7 +80,7 @@
 		{#each filteredSquads as squad}
 			<button
 				onclick={() => goto(`/squads/${squad.slug}/page=1`)}
-				class="flex w-full cursor-pointer items-center justify-between rounded-lg bg-stone-400/70 px-4 py-2 text-white hover:bg-stone-500/60 transition duration-300 active:scale-95"
+				class="flex w-full cursor-pointer items-center justify-between rounded-lg bg-stone-400/70 px-4 py-2 text-white transition duration-300 hover:bg-stone-500/60 active:scale-95"
 			>
 				<div class="flex items-center gap-2">
 					{#if squad.eaId > 3}
@@ -94,9 +100,14 @@
 				</div>
 				<div class="mr-2">
 					{($collectedCardsStore[squad?.eaId]?.length ?? 0) +
-						($impossibleCardsStore[squad?.eaId]?.length ?? 0)} / {$allCardsStore.filter(
-						(card) => card.versionId === squad.eaId
-					).length ?? 0}
+						($impossibleCardsStore[squad?.eaId]?.length ?? 0)} /
+					{Array.from(
+						new Map(
+							$allCardsStore
+								.filter((card) => card.versionId === squad?.eaId)
+								.map((card) => [card.resourceId, card])
+						).values()
+					).length}
 				</div>
 			</button>
 		{/each}

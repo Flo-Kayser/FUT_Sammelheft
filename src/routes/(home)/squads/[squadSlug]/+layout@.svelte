@@ -14,7 +14,8 @@
 	);
 </script>
 
-<div class="cursor-none"
+<div
+	class="cursor-none"
 	style={`background-image: url(${cardVersion.eaId > 3 ? `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png` : `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png`}); background-size: 150%; background-position: center;`}
 >
 	<div
@@ -38,7 +39,9 @@
 			style={`background-color:#${cardVersion?.textColor[0]}; color: #${cardVersion?.lineColor[0]}`}
 		>
 			{($collectedCardsStore[data?.versionId]?.length ?? 0) +
-				($impossibleCardsStore[data?.versionId]?.length ?? 0)} / {$cardsByVersionId?.length ?? 0}
+				($impossibleCardsStore[data?.versionId]?.length ?? 0)} /
+			{Array.from(new Map($cardsByVersionId.map((card) => [card.resourceId, card])).values())
+				.length}
 		</div>
 
 		{@render children()}
