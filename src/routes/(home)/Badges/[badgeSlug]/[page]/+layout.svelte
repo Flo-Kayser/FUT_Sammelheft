@@ -25,7 +25,7 @@
 		data?.badges?.find((badge) => badge.slug === data?.badgeSlug)?.allPlayerItemEaIds || [];
 
 
-	$: totalPages = Math.ceil(badgeTeamPlayerIds.length / settingsStore.cardsPerPage);
+	$: totalPages = Math.ceil(badgeTeamPlayerIds.length / $settingsStore.cardsPerPage);
 
 	$: badgeTeamPlayers =
 		badgeTeamPlayerIds?.length > 0
