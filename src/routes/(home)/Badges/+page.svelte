@@ -5,19 +5,18 @@
 
 	import { impossibleSwitchStore } from '$lib/stores/smallStores.js';
 
-	let badgeButtons = [];
 	import bgUrl from '$lib/assets/bg-images/bg-badges.png';
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
+	import { allBadges } from '$lib/stores/badges.js';
 
-	export let data;
 
-	onMount(async () => {
+	onMount(() => {
 		impossibleSwitchStore.set(false);
 	});
 
 	let filterTerm = '';
 
-	$: filteredBadges = data?.badges?.filter((badge) => {
+	$: filteredBadges = $allBadges?.filter((badge) => {
 		const name = badge.name?.toLowerCase() ?? '';
 		const query = filterTerm.toLowerCase();
 		return name.includes(query);
@@ -33,7 +32,6 @@
 
 		// noch keine Karten verfügbar?
 		if (!$allCardsStore?.length) {
-			console.warn('allCardsStore leer – warte auf Init');
 			return [];
 		}
 
@@ -73,7 +71,7 @@
 						{#await getHighlightedCardsForBadge(badge) then highlightedCards}
 							<div class="flex flex-wrap justify-center gap-2">
 								{#each highlightedCards.slice(0, 5) as card}
-									<RenderedCard
+									<!-- <RenderedCard
 										_isCollected={false}
 										_isImpossible={false}
 										core={data.coreData.data}
@@ -83,12 +81,12 @@
 											(rarity) => rarity.eaId === card.versionId
 										)}
 										_ignoredScale={true}
-									/>
+									/> -->
 								{/each}
 							</div>
 							<div class="flex flex-wrap justify-center gap-2">
 								{#each highlightedCards.slice(5, 8) as card}
-									<RenderedCard
+									<!-- <RenderedCard
 										_isCollected={false}
 										_isImpossible={false}
 										core={data.coreData.data}
@@ -98,7 +96,7 @@
 											(rarity) => rarity.eaId === card.versionId
 										)}
 										_ignoredScale={true}
-									/>
+									/> -->
 								{/each}
 							</div>
 						{/await}

@@ -7,12 +7,14 @@
 
 	onMount(() => {
 		allCardsStore.set(data.cards);
+		allBadges.set(data.badges);
 	});
 	if (typeof window !== 'undefined' && window.location.pathname === '/') {
 		goto('/squads');
 	}
 	export let children;
 	import { inject } from '@vercel/analytics';
+	import { allBadges } from '$lib/stores/badges';
 
 	inject();
 </script>
