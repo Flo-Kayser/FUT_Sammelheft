@@ -9,7 +9,7 @@
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
 	import { allBadges } from '$lib/stores/badges.js';
 
-
+	export let data
 
 	onMount(() => {
 		impossibleSwitchStore.set(false);
@@ -60,7 +60,7 @@
 		</div>
 		{#each filteredBadges as badge}
 			<button
-				on:click={() => goto(`/badges/${badge.slug}/page=1`)}
+				on:click={() => goto(`/Badges/${badge.slug}/page=1`)}
 				class="flex cursor-pointer flex-col justify-center gap-4 rounded-lg border-2 bg-stone-400/60 p-2 py-4"
 				style={`background-image: url(${bgUrl}); background-size: cover; background-position: center; background-repeat: no-repeat;`}
 			>
