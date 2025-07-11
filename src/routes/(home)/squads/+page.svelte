@@ -35,13 +35,8 @@
 	</div>
 </section>
 
-<section class="grid grid-cols-3 gap-4 px-8 pb-4">
-	<input
-		type="text"
-		bind:value={filterText}
-		placeholder="Squad suchen..."
-		class="col-start-1 w-full rounded-md bg-amber-500/60 px-4 py-2 text-lg font-bold text-stone-800 outline-none"
-	/>
+<section class="grid grid-cols-3 gap-4 px-8 mb-4">
+	
 
 	<div
 		class="col-start-3 flex w-full items-center justify-end gap-2 rounded-md bg-amber-500/60 px-6 text-lg font-bold text-stone-800"

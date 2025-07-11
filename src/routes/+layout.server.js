@@ -20,6 +20,27 @@ export async function load() {
     }
     const cards = await cardsResponse.json();
 
-    // 4. Gib alles gemeinsam zurück
-    return { coreData, additionalCoreData, cards };
+    // 4. Hole alle Seiten der Badges-Collection
+    let page = 1;
+    let badges = [];
+    let hasNext = true;
+
+    while (hasNext) {
+        const badgesResponse = await fetch(`https://www.fut.gg/api/fut/collections/25/?page=${page}`);
+        if (!badgesResponse.ok) {
+            throw new Error(`Failed to fetch badges on page ${page}`);
+        }
+
+        const badgesPage = await badgesResponse.json();
+        badges = badges.concat(badgesPage.data);
+
+        if (badgesPage.next === null) {
+            hasNext = false;
+        } else {
+            page++;
+        }
+    }
+
+    // 5. Gib alles gemeinsam zurück
+    return { coreData, additionalCoreData, cards, badges };
 }

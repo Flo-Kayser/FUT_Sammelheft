@@ -1,5 +1,4 @@
 <script>
-	import { badgeName } from '$lib/stores/badges.js';
 	import { settingsStore } from '$lib/stores/settings.js';
 	import { allCardsStore } from '$lib/stores/cards.js';
 
@@ -20,29 +19,21 @@
 
 	let searchInput;
 
-	badgeName.set(data?.badgeSlug);
-
 	$: currentPage = data?.currentPage;
 
-	let badgeTeam = [];
-	$: if ($badgeName) {
-		import(`$lib/jsonData/badges/${$badgeName}.json`).then((module) => {
-			badgeTeam = module.default;
-		});
-	}
+	$: badgeTeamPlayerIds =
+		data?.badges?.find((badge) => badge.slug === data?.badgeSlug)?.allPlayerItemEaIds || [];
 
-	import { get } from 'svelte/store';
+
+	$: totalPages = Math.ceil(badgeTeamPlayerIds.length / settingsStore.cardsPerPage);
 
 	$: badgeTeamPlayers =
-		badgeTeam?.length > 0
-			? badgeTeam.map((card) => {
-					const match = $allCardsStore.find((c) => c.resourceId === card.resourceId);
-					return { ...card, name: match?.name ?? 'Unbekannt' };
+		badgeTeamPlayerIds?.length > 0
+			? badgeTeamPlayerIds.map((cardId) => {
+					const match = $allCardsStore.find((c) => c.resourceId === cardId);
+					return { resourceId: cardId, name: match?.name ?? 'Unbekannt' };
 				})
 			: [];
-
-
-	$: totalPages = Math.ceil((badgeTeam?.length ?? 0) / ($settingsStore?.cardsPerPage ?? 1));
 
 	onMount(() => {
 		if (browser) {

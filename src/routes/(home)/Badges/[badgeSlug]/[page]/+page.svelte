@@ -1,6 +1,5 @@
 <script>
 	import { settingsStore } from '$lib/stores/settings';
-	import { badgeName } from '$lib/stores/badges.js';
 	import { allCardsStore } from '$lib/stores/cards';
 	import { highlightedCardStore, impossibleSwitchStore } from '$lib/stores/smallStores.js';
 
@@ -13,12 +12,14 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 
+	export let data;
+
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
 
 	import videoUrl from '$lib/assets/videos/New_Card_Unlocked_6.webm';
 	let videoElement;
 
-	function playAnimation(card,i) {
+	function playAnimation(card, i) {
 		if (
 			!videoElement ||
 			$collectedCardsStore?.[card.versionId]?.includes(card.resourceId) ||
@@ -32,17 +33,23 @@
 		videoElement.play().catch((e) => console.error('Video konnte nicht abgespielt werden', e));
 	}
 
-	export let data;
+	$: badgeTeamPlayerIds =
+		data?.badges?.find((badge) => badge.slug === data?.badgeSlug)?.allPlayerItemEaIds || [];
 
-	let badgeTeam = [];
-	$: if ($badgeName) {
-		import(`$lib/jsonData/badges/${$badgeName}.json`).then((module) => {
-			badgeTeam = module.default;
-		});
-	}
+	$: badgeTeamPlayers =
+		$allCardsStore.length > 0 && badgeTeamPlayerIds?.length > 0
+			? badgeTeamPlayerIds.map((cardId) => {
+					const match = $allCardsStore.find((c) => c.resourceId === cardId);
+					return {
+						resourceId: cardId,
+						versionId: match?.versionId,
+						name: match?.name ?? 'Unbekannt'
+					};
+				})
+			: [];
 
 	$: currentPage = data.currentPage;
-	$: paginatedCards = Object.values(badgeTeam)?.slice(
+	$: paginatedCards = Object.values(badgeTeamPlayers)?.slice(
 		(currentPage - 1) * $settingsStore?.cardsPerPage,
 		(currentPage - 1) * $settingsStore?.cardsPerPage + $settingsStore?.cardsPerPage
 	);
@@ -129,7 +136,7 @@
 			<button
 				class={`cursor-pointer  ${card.resourceId === localHighlightedId ? 'animate-pingCard' : ''}`}
 				onclick={() => {
-					playAnimation(card,i);
+					playAnimation(card, i);
 
 					$impossibleSwitchStore
 						? toggleImpossibleState(i, card?.versionId)
