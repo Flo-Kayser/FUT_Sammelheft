@@ -61,7 +61,7 @@
 				style={`color: #${cardVersion?.textColor[0]};`}
 			>
 				<div class="scale-y-[1.2] text-[1.73em] font-[800]">{card?.rating}</div>
-				<div class="mt-0.5 scale-y-[1.2] text-[0.83em] font-bold">{card?.preferredPosition}</div>
+				<div class="mt-0 scale-y-[1.2] text-[0.83em] font-bold">{card?.preferredPosition}</div>
 			</div>
 			<div class="absolute top-[63%] right-1/2 w-full translate-x-1/2">
 				<div class="mb-1 text-center text-2xl font-black whitespace-nowrap">{card?.cardName}</div>
