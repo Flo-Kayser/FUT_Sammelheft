@@ -7,6 +7,8 @@
 	export let cardVersion;
 	export let inputRef;
 
+	export let searchArray = $sortFilteredCardsByRating
+
 	let searchTerm = '';
 	let hoveredName = null;
 	let selectedSuggestionIndex = -1;
@@ -15,7 +17,7 @@
 	let matchingPlayerNames = [];
 	let suggestionRefs = [];
 
-	$: playerNames = $sortFilteredCardsByRating?.map((card) => card.name);
+	$: playerNames = searchArray?.map((card) => card.name);
 
 	$: matchingPlayerNames =
 		searchTerm.length > 0
@@ -42,7 +44,7 @@
 		const search = searchTerm.toLowerCase();
 		const index = playerNames.findIndex((name) => name.toLowerCase().includes(search));
 		if (index !== -1) {
-			highlightedCardStore.set($sortFilteredCardsByRating[index].resourceId);
+			highlightedCardStore.set(searchArray[index].resourceId);
 			goto(`./page=${getPlayerPageNumber(index)}`);
 			searchTerm = '';
 			hoveredName = null;

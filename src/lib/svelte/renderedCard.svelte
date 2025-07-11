@@ -3,13 +3,24 @@
 	import { resolveClub } from '$lib/Utils.js';
 	import PlayStyleIcons from '$lib/playStyleIcons.svelte';
 
-	export let card, cardVersion, core, additionalCoreData, _isImpossible, _isCollected;
+	export let card,
+		cardVersion,
+		core,
+		additionalCoreData,
+		_isImpossible,
+		_isCollected,
+		_ignoredScale = false;
+
 	let club;
 
 	let scale;
 
-	settingsStore.subscribe((value) => (scale = value?.cardScale || 1));
 
+	if (_ignoredScale === false) {
+		settingsStore.subscribe((value) => (scale = value?.cardScale || 1));
+	} else {
+		scale = 0.4;
+	}
 	$: isGoalkeeper =
 		card?.preferredPosition === 'GK' ||
 		card?.preferredPosition === 'TH' ||
@@ -53,7 +64,7 @@
 				<div class="mt-0.5 scale-y-[1.2] text-[0.83em] font-bold">{card?.preferredPosition}</div>
 			</div>
 			<div class="absolute top-[63%] right-1/2 w-full translate-x-1/2">
-				<div class="mb-1 text-2xl font-black whitespace-nowrap">{card?.cardName}</div>
+				<div class="mb-1 text-center text-2xl font-black whitespace-nowrap">{card?.cardName}</div>
 				<div class="absolute left-1/2 flex w-[68%] -translate-x-1/2 justify-between">
 					{#each card?.attributes as attribute, i}
 						<div class="flex flex-col items-center">
@@ -65,18 +76,18 @@
 			</div>
 			<div class="absolute top-[83%] flex w-full scale-125 items-center justify-center gap-2">
 				<img
-					src={`https://cdn.easysbc.io/fc25/countries/${nation.eaId}.png`}
+					src={`https://cdn.easysbc.io/fc25/countries/${nation?.eaId}.png`}
 					alt={nation?.slug}
 					class="h-[0.9525em] w-[1.65em]"
 				/>
 				<img
-					src={`https://cdn.easysbc.io/fc25/leagues/dark/${league.eaId}.png`}
+					src={`https://cdn.easysbc.io/fc25/leagues/dark/${league?.eaId}.png`}
 					alt={league?.slug}
 					class="ratio-square h-[1.375em]"
 				/>
 				{#if !(club?.eaId === 114605 || club?.eaId === 112658)}
 					<img
-						src={`https://cdn.easysbc.io/fc25/clubs/dark/${club.eaId}.png`}
+						src={`https://cdn.easysbc.io/fc25/clubs/dark/${club?.eaId}.png`}
 						alt={club?.slug}
 						class="ratio-square h-[1.375em]"
 					/>

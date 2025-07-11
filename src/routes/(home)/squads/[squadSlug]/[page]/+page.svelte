@@ -8,7 +8,6 @@
 	import { highlightedCardStore, impossibleSwitchStore } from '$lib/stores/smallStores.js';
 	import { onDestroy } from 'svelte';
 
-
 	import videoUrl from '$lib/assets/videos/New_Card_Unlocked_6.webm';
 
 	export let data;
@@ -16,18 +15,18 @@
 	let videoElement;
 
 	function playAnimation(i) {
-	if (
-		!videoElement || 
-		collectedCardsByVersionId?.includes(paginatedCards[i].resourceId) ||
-		impossibleCardsByVersionId?.includes(paginatedCards[i].resourceId) ||
-		$impossibleSwitchStore === true
-	) {
-		return;
+		if (
+			!videoElement ||
+			collectedCardsByVersionId?.includes(paginatedCards[i].resourceId) ||
+			impossibleCardsByVersionId?.includes(paginatedCards[i].resourceId) ||
+			$impossibleSwitchStore === true
+		) {
+			return;
+		}
+		videoElement.style.display = 'block';
+		videoElement.volume = 0.2;
+		videoElement.play().catch((e) => console.error('Video konnte nicht abgespielt werden', e));
 	}
-	videoElement.style.display = 'block';
-	videoElement.volume = 0.2;
-	videoElement.play().catch((e) => console.error('Video konnte nicht abgespielt werden', e));
-}
 
 	const { squadName, versionId, coreData, additionalCoreData } = data;
 	const { data: core } = coreData;
@@ -42,8 +41,6 @@
 
 	let collectedCardsByVersionId = [];
 	let impossibleCardsByVersionId = [];
-
-	let _isImpossibleMode = true;
 
 	if (browser) {
 		collectedCardsStore.subscribe((c) => (collectedCardsByVersionId = c[versionId]));
@@ -126,14 +123,14 @@
 
 <section class="px-8 pt-8">
 	{#if paginatedCards?.length > 0}
-		<div class="flex cursor-none flex-wrap items-center gap-x-2">
+		<div class="flex flex-wrap items-center gap-x-2">
 			{#each paginatedCards as card, i}
 				<button
 					on:click={() => {
 						playAnimation(i);
 						$impossibleSwitchStore ? toggleImpossibleState(i) : toggleCollectionState(i);
 					}}
-					class={`cursor-none  ${card.resourceId === localHighlightedId ? 'animate-pingCard' : ''}`}
+					class={`cursor-pointer  ${card.resourceId === localHighlightedId ? 'animate-pingCard' : ''}`}
 					style={`color: #${cardVersion?.textColor[0]}`}
 				>
 					<RenderedCard

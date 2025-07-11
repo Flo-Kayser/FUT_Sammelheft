@@ -1,14 +1,15 @@
 <script>
-	import PaginationNav from '$lib/svelte/paginationNav.svelte';
 	import { cardsByVersionId, filteredCards, cardsFilter } from '$lib/stores/cards.js';
-	import { goto } from '$app/navigation';
-	import { resetCardsFilter } from '$lib/Utils';
-	import DropDown from '$lib/svelte/dropDown.svelte';
-	import PageSettings from '$lib/svelte/pageSettings.svelte';
 	import { settingsStore } from '$lib/stores/settings.js';
-	import PlayerSearch from '$lib/svelte/playerSearch.svelte';
+	import { resetCardsFilter } from '$lib/Utils';
+
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
+
+	import PlayerSearch from '$lib/svelte/playerSearch.svelte';
+	import PaginationNav from '$lib/svelte/paginationNav.svelte';
+	import DropDown from '$lib/svelte/dropDown.svelte';
+	import PageSettings from '$lib/svelte/pageSettings.svelte';
 
 	import { spring } from 'svelte/motion';
 	const mouseCoords = spring({ x: 0, y: 0 });
@@ -60,13 +61,13 @@
 		: [];
 </script>
 
-<svelte:window on:mousemove={onMouseMove} />
+
 <!-- svelte-ignore element_invalid_self_closing_tag -->
-<div class="cursor" style:--x={`${$mouseCoords.x}px`} style:--y={`${$mouseCoords.y}px`} />
+
 {@render children()}
 
 <section
-	class="absolute bottom-0 left-1/2 flex h-28 w-full -translate-x-1/2 cursor-none justify-center bg-stone-800/60"
+	class="absolute bottom-0 left-1/2 flex h-28 w-full -translate-x-1/2  justify-center bg-stone-800/60"
 >
 	<PlayerSearch {cardVersion} bind:inputRef={searchInput} />
 

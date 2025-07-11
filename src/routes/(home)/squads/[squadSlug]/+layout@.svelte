@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class="cursor-none"
+	
 	style={`background-image: url(${cardVersion.eaId > 3 ? `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png` : `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png`}); background-size: 150%; background-position: center;`}
 >
 	<div
@@ -28,7 +28,7 @@
 
 				goto('/squads');
 			}}
-			class="absolute top-3 left-3 cursor-none rounded-md px-2 py-1 font-bold shadow-xl transition duration-300 hover:brightness-80 active:scale-95"
+			class="absolute top-3 left-3 cursor-pointer rounded-md px-2 py-1 font-bold shadow-xl transition duration-300 hover:brightness-80 active:scale-95"
 			style={`background-color:#${cardVersion?.textColor[0]}; color: #${cardVersion?.lineColor[0]}`}
 			>Squad Übersicht</button
 		>

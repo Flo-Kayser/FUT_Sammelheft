@@ -68,7 +68,7 @@
 		<nav
 			class="flex w-max items-center gap-4 rounded-full bg-amber-500/60 px-3 py-2 text-stone-900"
 		>
-			{#each [{ href: '/squads', label: 'Squadübersicht' }, { href: '/meinBereich', label: 'Mein Bereich' }, { href: '/faq', label: 'FAQ' }, { href: '/alleKartenVon', label: 'Alle Karten von ...' }] as { href, label }}
+			{#each [{ href: '/squads', label: 'Squadübersicht' }, { href: '/meinBereich', label: 'Mein Bereich' }, { href: '/faq', label: 'FAQ' }, { href: '/alleKartenVon', label: 'Alle Karten von ...' }, { href: '/Badges', label: 'Badges' }] as { href, label }}
 				<button
 					onclick={() => goto(href)}
 					class={`w-44 cursor-pointer rounded-full border-2 p-2 text-center font-bold transition-all duration-300 ${page.url.pathname.includes(href) ? 'border-white bg-white' : ''}`}
