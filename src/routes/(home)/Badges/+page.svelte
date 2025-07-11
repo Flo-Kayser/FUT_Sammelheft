@@ -13,29 +13,6 @@
 
 	onMount(async () => {
 		impossibleSwitchStore.set(false);
-
-		const modules = import.meta.glob('../../../lib/jsonData/badges/*.json');
-
-		for (const path in modules) {
-			const mod = await modules[path]();
-			const parts = path.split('/');
-			const fileName = parts[parts.length - 1].replace('.json', '');
-			const cards = mod.default || [];
-
-			const previewCards = cards.slice(0, 6);
-			const previewCardIds = previewCards.map((card) => ({
-				resourceId: card.resourceId,
-				versionId: card.versionId
-			}));
-
-			badgeButtons.push({
-				name: mod.name || fileName,
-				fileName,
-				previewCardIds
-			});
-		}
-
-		badgeButtons = [...badgeButtons];
 	});
 
 	let filterTerm = '';
@@ -73,12 +50,12 @@
 	<h1 class="border-t-2 py-2 text-center text-3xl font-black text-black">Alle Badges</h1>
 
 	<div class="mt-6 grid grid-cols-2 gap-4 px-4 pb-10">
-		<div class="col-start-2 wfull flex justify-end">
+		<div class="wfull col-start-2 flex justify-end">
 			<input
 				type="text"
 				bind:value={filterTerm}
 				placeholder="Badge suchen..."
-				class="w-1/2 rounded-md  px-4 py-2 text-lg font-bold text-white outline-none"
+				class="w-1/2 rounded-md px-4 py-2 text-lg font-bold text-white outline-none"
 				style={`background-image: url(${bgUrl}); background-size: cover; background-position: center; background-repeat: no-repeat;`}
 			/>
 		</div>
