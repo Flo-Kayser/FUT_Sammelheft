@@ -1,20 +1,23 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import GlobalMenu from '$lib/svelte/globalMenu.svelte';
 	export let children;
 </script>
 
 <!-- svelte-ignore a11y_consider_explicit_label -->
 <div class="min-h-screen backdrop-blur-xl select-none">
-	<div class="absolute top-3 left-8 z-100 flex items-center gap-2 text-white">
-		<div class="flex flex-col items-center gap-2 border-r-2 pr-2">
+	<div
+		class="absolute top-3 left-2 z-100 flex items-center gap-1 text-white lg:top-20 xl:top-3 lg:left-4 md:gap-2 xl:left-8"
+	>
+		<div class="flex flex-col items-center border-r-2 md:gap-2 md:pr-2">
 			<a
 				href="https://www.instagram.com/julianfgu/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class=" flex items-center gap-1 rounded-lg border-2 px-1"
+				class="flex items-center gap-1 rounded-lg px-1 md:border-2"
 			>
-				JulianFGU
+				<span class="hidden md:block">JuliusFGU</span>
 				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
 					><g fill="none"
 						><path
@@ -30,9 +33,9 @@
 				href="https://www.instagram.com/flo.kysr/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class=" flex items-center gap-1 rounded-lg border-2 px-1"
+				class="flex items-center gap-1 rounded-lg px-1 md:border-2"
 			>
-				Entwickler
+				<span class="hidden md:block">Entwickler</span>
 				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
 					><g fill="none"
 						><path
@@ -45,7 +48,7 @@
 				>
 			</a>
 		</div>
-		<div class="flex flex-col items-center gap-2">
+		<div class="flex flex-col items-center md:gap-2">
 			<a href="https://www.youtube.com/@JulianFGU" target="_blank" rel="noopener noreferrer">
 				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
 					><path
@@ -64,19 +67,11 @@
 			</a>
 		</div>
 	</div>
-	<div class="sticky top-0 right-0 z-50 flex w-full justify-end pt-2 pr-8">
-		<nav
-			class="flex w-max items-center gap-4 rounded-full bg-amber-500/60 px-3 py-2 text-stone-900"
-		>
-			{#each [{ href: '/squads', label: 'Squadübersicht' }, { href: '/Badges', label: 'Badges' }, { href: '/meinBereich', label: 'Mein Bereich' }, { href: '/faq', label: 'FAQ' }, { href: '/alleKartenVon', label: 'Alle Karten von ...' }] as { href, label }}
-				<button
-					onclick={() => goto(href)}
-					class={`w-44 cursor-pointer rounded-full border-2 p-2 text-center font-bold transition-all duration-300 ${page.url.pathname.includes(href) ? 'border-white bg-white' : ''}`}
-					>{label}</button
-				>
-			{/each}
-		</nav>
+	<div class="relative w-screen">
+		<GlobalMenu />
 	</div>
+	<div class="mt-20 lg:mt-40">
 
-	{@render children()}
+		{@render children()}
+	</div>
 </div>

@@ -18,7 +18,7 @@
 			class="absolute top-3 left-3 cursor-pointer rounded-md px-2 py-1 font-bold text-stone-300 shadow-xl transition duration-300 hover:brightness-80 active:scale-95"
 			>Badge Übersicht</button
 		>
-		<h1 class="text-center text-5xl font-black text-[#e23070]">{data?.badgeSlug?.toUpperCase()}</h1>
+		<h1 class="text-center mt-16 lg:mt-0 lg:text-5xl font-black text-2xl text-[#e23070]">{data?.badgeSlug?.toUpperCase()}</h1>
 
 		{@render children()}
 	</div>

@@ -67,7 +67,7 @@
 {@render children()}
 
 <section
-	class="absolute bottom-0 left-1/2 flex h-28 w-full -translate-x-1/2  justify-center bg-stone-800/60"
+	class="absolute bottom-0 left-1/2 flex h-42 lg:h-28 w-full -translate-x-1/2  justify-center bg-stone-800/60"
 >
 	<PlayerSearch {cardVersion} bind:inputRef={searchInput} />
 

@@ -29,22 +29,21 @@
 	});
 </script>
 
-<section class="h-40 text-black brightness-150">
+<section class="h-30 text-black brightness-150">
 	<div class="flex h-full items-center justify-center">
-		<h1 class="text-4xl font-bold">EA SPORTS FC 25 FUT-SAMMELHEFT</h1>
+		<h1 class="text-center text-2xl font-bold lg:text-4xl">EA SPORTS FC 25 FUT-SAMMELHEFT</h1>
 	</div>
 </section>
 
-<section class="grid grid-cols-3 gap-4 px-8 mb-4">
-	
-<input
+<section class="mb-4 grid grid-cols-1 gap-4 px-4 lg:px-8 lg:grid-cols-3">
+	<input
 		type="text"
 		bind:value={filterText}
 		placeholder="Squad suchen..."
 		class="col-start-1 w-full rounded-md bg-amber-500/60 px-4 py-2 text-lg font-bold text-stone-800 outline-none"
 	/>
 	<div
-		class="col-start-3 flex w-full items-center justify-end gap-2 rounded-md bg-amber-500/60 px-6 text-lg font-bold text-stone-800"
+		class="col-start-1 flex w-full items-center justify-end gap-2 rounded-md bg-amber-500/60 px-6 py-2 text-lg font-bold text-stone-800 md:py-0 lg:col-start-3"
 	>
 		Gesammelt:
 		{#if $settingsStore.globalCounterWithBaseCards}
@@ -75,14 +74,14 @@
 	</div>
 </section>
 
-<section class="grid grid-cols-3 gap-4 px-8">
+<section class="grid grid-cols-2 gap-4 px-4 lg:px-8 pb-8 lg:grid-cols-3">
 	{#if filteredSquads?.length > 0}
 		{#each filteredSquads as squad}
 			<button
 				onclick={() => goto(`/squads/${squad.slug}/page=1`)}
-				class="flex w-full cursor-pointer items-center justify-between rounded-lg bg-stone-400/70 px-4 py-2 text-white transition duration-300 hover:bg-stone-500/60 active:scale-95"
+				class="flex w-full cursor-pointer flex-col items-center justify-between rounded-lg bg-stone-400/70 px-4 py-2 text-white transition duration-300 hover:bg-stone-500/60 active:scale-95 lg:flex-row"
 			>
-				<div class="flex items-center gap-2">
+				<div class="flex flex-col items-center gap-2 text-xs lg:flex-row lg:text-base">
 					{#if squad.eaId > 3}
 						<img
 							src={`https://cdn.easysbc.io/fc25/cards/e_${squad.eaId}_0.png`}
@@ -96,9 +95,9 @@
 							class="w-10"
 						/>
 					{/if}
-					<div class="text-start">{squad.name}</div>
+					<div class="text-center lg:text-start">{squad.name}</div>
 				</div>
-				<div class="mr-2">
+				<div class="lg:mr-2">
 					{($collectedCardsStore[squad?.eaId]?.length ?? 0) +
 						($impossibleCardsStore[squad?.eaId]?.length ?? 0)} /
 					{Array.from(

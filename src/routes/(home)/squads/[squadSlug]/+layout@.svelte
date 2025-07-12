@@ -15,7 +15,6 @@
 </script>
 
 <div
-	
 	style={`background-image: url(${cardVersion.eaId > 3 ? `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png` : `https://cdn.easysbc.io/fc25/cards/e_${cardVersion.eaId}_0.png`}); background-size: 150%; background-position: center;`}
 >
 	<div
@@ -25,7 +24,6 @@
 		<button
 			onclick={() => {
 				resetCardsFilter();
-
 				goto('/squads');
 			}}
 			class="absolute top-3 left-3 cursor-pointer rounded-md px-2 py-1 font-bold shadow-xl transition duration-300 hover:brightness-80 active:scale-95"
@@ -33,7 +31,7 @@
 			>Squad Übersicht</button
 		>
 
-		<h1 class="text-center text-5xl font-black">{squadSlug?.toUpperCase()}</h1>
+		<h1 class="text-center mt-16 lg:mt-0 lg:text-5xl text-2xl font-black">{squadSlug?.toUpperCase()}</h1>
 		<div
 			class="absolute top-3 right-3 w-max rounded-md px-2 py-1 text-3xl font-black"
 			style={`background-color:#${cardVersion?.textColor[0]}; color: #${cardVersion?.lineColor[0]}`}

@@ -65,9 +65,9 @@
 </script>
 
 <section class="mx-auto mt-10 max-w-[75%] rounded-lg bg-stone-500/50 px-4 py-12">
-	<div class="relative flex w-full items-center justify-evenly border-b-2 py-4 text-white">
-		<div class="text-xl font-bold">Zeige mir alle Karten von:</div>
-		<div class="relative w-1/2">
+	<div class="relative flex w-full items-center justify-evenly border-b-2 py-4 text-white flex-col lg:flex-row gap-2">
+		<div class="lg:text-xl font-bold">Zeige mir alle Karten von:</div>
+		<div class="relative w-full lg:w-1/2">
 			<input
 				type="text"
 				class={`w-full bg-stone-600/80 px-3 py-2 font-semibold brightness-125 outline-none select-none ${
@@ -136,12 +136,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="mt-6 flex flex-col text-center">
+	<div class="mt-6 flex flex-col text-center justify-center">
 		{#if playerCards?.length !== 0}
-			<div class="mb-5 scale-y-120 text-2xl font-black text-white">
+			<div class="mb-5 scale-y-120 lg:text-2xl font-black text-white">
 				{playerCards[0]?.name} hat bis heute {playerCards?.length} Karten gesammelt.
 			</div>
-			<div class="flex flex-wrap gap-4">
+			<div class="flex flex-wrap gap-4 justify-center">
 				{#each playerCards as card}
 					<RenderedCard
 						{card}
@@ -152,6 +152,7 @@
 						)}
 						core={data?.coreData?.data}
 						additionalCoreData={data.additionalCoreData}
+						_ignoredScale={true}
 					/>
 				{/each}
 			</div>

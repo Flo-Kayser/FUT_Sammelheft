@@ -8,13 +8,13 @@
 	}
 </script>
 
-<div class="mx-auto max-w-4xl mt-10 rounded-lg px-4 py-12 bg-stone-500/50">
-	<h1 class="mb-8 px-2 text-3xl font-bold">FAQ &ndash; Häufig gestellte Fragen</h1>
+<div class="mx-auto max-w-2/3 lg:max-w-4xl mt-10 rounded-lg px-4 py-12 bg-stone-500/50">
+	<h1 class="mb-8 px-2 text-3xl text-center font-bold">FAQ &ndash; Häufig gestellte Fragen</h1>
 
 	{#each faqs as faq, index}
 		<div class="border-b py-4">
 			<button
-				class="relative w-full text-left text-lg font-semibold focus:outline-none flex gap-2 items-center cursor-pointer"
+				class="relative w-full text-left text-base lg:text-lg font-semibold focus:outline-none flex gap-2 items-center cursor-pointer"
 				on:click={() => toggle(index)}
 			>
 				<div>
@@ -36,7 +36,7 @@
 			</button>
 
 			{#if openIndex === index}
-				<p transition:slide class="mt-2 pl-8 text-stone-900">{faq.answer}</p>
+				<p transition:slide class="mt-2 pl-8 text-sm lg:text-base text-stone-900">{faq.answer}</p>
 			{/if}
 		</div>
 	{/each}

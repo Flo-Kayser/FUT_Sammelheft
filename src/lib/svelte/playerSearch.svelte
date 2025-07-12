@@ -58,7 +58,7 @@
 	}
 </script>
 
-<div class="absolute top-1/2 left-4">
+<div class="absolute bottom-2 left-2 lg:left-4">
 	<input
 		type="text"
 		class={`px-3 py-2 font-semibold outline-none select-none ${

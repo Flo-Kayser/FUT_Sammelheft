@@ -9,7 +9,7 @@
 	import RenderedCard from '$lib/svelte/renderedCard.svelte';
 	import { allBadges } from '$lib/stores/badges.js';
 
-	export let data
+	export let data;
 
 	onMount(() => {
 		impossibleSwitchStore.set(false);
@@ -48,13 +48,13 @@
 <section class="mt-10 px-8">
 	<h1 class="border-t-2 py-2 text-center text-3xl font-black text-black">Alle Badges</h1>
 
-	<div class="mt-6 grid grid-cols-2 gap-4 px-4 pb-10">
-		<div class="wfull col-start-2 flex justify-end">
+	<div class="mt-6 grid grid-cols-1 gap-4 px-4 pb-10 lg:grid-cols-2">
+		<div class="flex w-full justify-end lg:col-start-2">
 			<input
 				type="text"
 				bind:value={filterTerm}
 				placeholder="Badge suchen..."
-				class="w-1/2 rounded-md px-4 py-2 text-lg font-bold text-white outline-none"
+				class="w-full rounded-md px-4 py-2 text-lg font-bold text-white outline-none lg:w-1/2"
 				style={`background-image: url(${bgUrl}); background-size: cover; background-position: center; background-repeat: no-repeat;`}
 			/>
 		</div>
@@ -70,7 +70,23 @@
 				{#if $allCardsStore.length > 0}
 					<div class="flex flex-col justify-center gap-2">
 						{#await getHighlightedCardsForBadge(badge) then highlightedCards}
-							<div class="flex flex-wrap justify-center gap-2">
+							<div class="flex flex-wrap justify-center gap-2 md:hidden">
+								{#each highlightedCards.slice(0, 2) as card}
+									<RenderedCard
+										_isCollected={false}
+										_isImpossible={false}
+										core={data.coreData.data}
+										additionalCoreData={data.additionalCoreData}
+										{card}
+										cardVersion={data.coreData.data.rarities.find(
+											(rarity) => rarity.eaId === card.versionId
+										)}
+										_ignoredScale={true}
+									/>
+								{/each}
+							</div>
+
+							<div class="hidden flex-wrap justify-center gap-2 md:flex">
 								{#each highlightedCards.slice(0, 5) as card}
 									<RenderedCard
 										_isCollected={false}
@@ -85,7 +101,7 @@
 									/>
 								{/each}
 							</div>
-							<div class="flex flex-wrap justify-center gap-2">
+							<div class="hidden flex-wrap justify-center gap-2 lg:flex">
 								{#each highlightedCards.slice(5, 8) as card}
 									<RenderedCard
 										_isCollected={false}

@@ -1,5 +1,5 @@
 <script>
-	import { goto } from "$app/navigation";
+	import { goto } from '$app/navigation';
 
 	export let currentPage;
 	export let totalPages;
@@ -29,16 +29,18 @@
 	}
 </script>
 
-<section class="mt-auto select-none" style={`color: #${cardVersion?.textColor[0]}`}>
-	
+<section
+	class="absolute top-4 left-1/2 -translate-x-1/2 select-none"
+	style={`color: #${cardVersion?.textColor[0]}`}
+>
 	{#if totalPages > 1}
-		<h2 class="text-center text-lg font-bold">Seite {currentPage} von {totalPages}</h2>
+		<h2 class="text-center text-sm font-bold lg:text-lg">Seite {currentPage} von {totalPages}</h2>
 
-		<div class="my-4 flex justify-center gap-2 items-center">
+		<div class="my-4 flex items-center justify-center gap-2">
 			<!-- Zurück -->
 			<button
-				onclick={()=>goto(`./page=${Math.max(1, Number(currentPage) - 1)}`)}
-				class="rounded border px-3 py-1 hover:brightness-150 cursor-pointer" 
+				onclick={() => goto(`./page=${Math.max(1, Number(currentPage) - 1)}`)}
+				class="cursor-pointer rounded border px-3 py-1 text-xs hover:brightness-150 lg:text-base"
 				aria-disabled={Number(currentPage) === 1}
 				style="pointer-events: {Number(currentPage) === 1 ? 'none' : 'auto'}; opacity: {Number(
 					currentPage
@@ -52,15 +54,16 @@
 			<!-- Seitenzahlen -->
 			{#each pagesToShow as page, i}
 				{#if i > 0 && page - pagesToShow[i - 1] > 1}
-					<span class="px-1 w-10 text-xl font-bold letter-spacing-2 text-center pointer-events-none select-none">…</span>
+					<span
+						class="letter-spacing-2 pointer-events-none w-6 px-1 text-center text-sm font-bold select-none lg:w-10 lg:text-xl"
+						>…</span
+					>
 				{/if}
-				
-				<button
-					onclick={()=>goto(`./page=${page}`)}
-					style={`${Number(currentPage) === page ? `background-color: #${cardVersion?.lineColor[0]}`:''}`}
-					class="rounded border w-10 py-1 text-center hover:brightness-150 cursor-pointer"
 
-					
+				<button
+					onclick={() => goto(`./page=${page}`)}
+					style={`${Number(currentPage) === page ? `background-color: #${cardVersion?.lineColor[0]}` : ''}`}
+					class="flex w-6 cursor-pointer items-center justify-center rounded border text-sm hover:brightness-150 lg:w-10 lg:py-1 lg:text-base"
 				>
 					{page}
 				</button>
@@ -68,8 +71,8 @@
 
 			<!-- Weiter -->
 			<button
-				onclick={()=>goto(`./page=${Math.min(Number(currentPage) + 1, totalPages)}`)}
-				class="rounded border  px-3 py-1 hover:brightness-150 cursor-pointer"
+				onclick={() => goto(`./page=${Math.min(Number(currentPage) + 1, totalPages)}`)}
+				class="cursor-pointer rounded border px-3 py-1 text-xs hover:brightness-150 lg:text-base"
 				aria-disabled={currentPage >= totalPages}
 				style="pointer-events: {currentPage >= totalPages
 					? 'none'
