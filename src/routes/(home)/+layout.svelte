@@ -17,7 +17,7 @@
 				rel="noopener noreferrer"
 				class="flex items-center gap-1 rounded-lg px-1 md:border-2"
 			>
-				<span class="hidden md:block">JuliusFGU</span>
+				<span class="hidden md:block">JulianFGU</span>
 				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
 					><g fill="none"
 						><path
