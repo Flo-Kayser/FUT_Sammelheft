@@ -17,7 +17,7 @@
 	}
 </script>
 
-<div class="sticky top-0 right-0 w-full pt-2 flex pr-2 lg:pr-4 flex-col items-end z-100" >
+<div class="sticky top-0 right-0 w-full pt-2 flex pr-2 lg:pr-4 flex-col items-end" >
 	<!-- Toggle Button -->
 	<div class="flex justify-end lg:hidden h-14">
 		<button on:click={toggleMenu} class="rounded-xl text-xl bg-amber-500 px-4 py-2 font-bold text-stone-900">
