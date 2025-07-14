@@ -2,8 +2,6 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { allCardsStore } from '$lib/stores/cards';
-
-	import { inject } from '@vercel/analytics';
 	import { allBatches } from '$lib/stores/batches';
 
 	import { goto } from '$app/navigation';
@@ -25,7 +23,6 @@
 	}
 	export let children;
 
-	inject();
 </script>
 
 <div
