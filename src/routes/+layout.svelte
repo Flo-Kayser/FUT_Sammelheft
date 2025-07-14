@@ -2,25 +2,34 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { allCardsStore } from '$lib/stores/cards';
-	import { goto } from '$app/navigation';
-	export let data;
 
-	onMount(() => {
-		allCardsStore.set(data.cards);
-		allBadges.set(data.badges);
+	import { inject } from '@vercel/analytics';
+	import { allBatches } from '$lib/stores/batches';
+
+	import { goto } from '$app/navigation';
+	import {
+		ensureAllCardsStore,
+		ensureManagerDataStore,
+		ensureVersionAssetsStore,
+		ensureBatchesStore
+	} from '$lib/utils/initStores';
+
+	onMount(async () => {
+		await ensureAllCardsStore();
+		await ensureManagerDataStore();
+		await ensureVersionAssetsStore();
+		await ensureBatchesStore();
 	});
 	if (typeof window !== 'undefined' && window.location.pathname === '/') {
 		goto('/squads');
 	}
 	export let children;
-	import { inject } from '@vercel/analytics';
-	import { allBadges } from '$lib/stores/badges';
 
 	inject();
 </script>
 
 <div
-	style={`background-image: url('/rhs.jpg'); background-size: cover; background-position: 70%; background-repeat: no-repeat; background-attachment: fixed;`}
+	style={`background-image: url('https://res.cloudinary.com/dppqw6sbt/image/upload/v1752453063/rhs_snxmkd.jpg'); background-size: cover; background-position: 70%; background-repeat: no-repeat; background-attachment: fixed;`}
 	class="min-h-screen"
 >
 	{@render children()}

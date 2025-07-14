@@ -1,9 +1,9 @@
 <script>
 	import { allCardsStore } from '$lib/stores/cards';
-	import RenderedCard from '$lib/svelte/renderedCard.svelte';
-	import { get } from 'svelte/store';
+	import { versionAssetsStore } from '$lib/stores/dataStores';
 
-	export let data;
+	import RenderedCard from '$lib/svelte/components/renderedCard.svelte';
+	import { get } from 'svelte/store';
 
 	let searchTerm = '';
 
@@ -22,8 +22,6 @@
 		searchTerm.length > 1
 			? playerNames.filter((name) => name.toLowerCase().includes(searchTerm.toLowerCase()))
 			: [];
-
-	$: console.log('Matching Player Names:', matchingPlayerNames);
 
 	$: if (searchTerm.length === 0) {
 		selectedSuggestionIndex = -1;
@@ -65,8 +63,10 @@
 </script>
 
 <section class="mx-auto mt-10 max-w-[75%] rounded-lg bg-stone-500/50 px-4 py-12">
-	<div class="relative flex w-full items-center justify-evenly border-b-2 py-4 text-white flex-col lg:flex-row gap-2">
-		<div class="lg:text-xl font-bold">Zeige mir alle Karten von:</div>
+	<div
+		class="relative flex w-full flex-col items-center justify-evenly gap-2 border-b-2 py-4 text-white lg:flex-row"
+	>
+		<div class="font-bold lg:text-xl">Zeige mir alle Karten von:</div>
 		<div class="relative w-full lg:w-1/2">
 			<input
 				type="text"
@@ -136,22 +136,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="mt-6 flex flex-col text-center justify-center">
+	<div class="mt-6 flex flex-col justify-center text-center">
 		{#if playerCards?.length !== 0}
-			<div class="mb-5 scale-y-120 lg:text-2xl font-black text-white">
+			<div class="mb-5 scale-y-120 font-black text-white lg:text-2xl">
 				{playerCards[0]?.name} hat bis heute {playerCards?.length} Karten gesammelt.
 			</div>
-			<div class="flex flex-wrap gap-4 justify-center">
+			<div class="flex flex-wrap justify-center gap-4">
 				{#each playerCards as card}
 					<RenderedCard
 						{card}
+						cardVersion={$versionAssetsStore.find((v) => v.eaId === card.versionId)}
 						_isImpossible={false}
-						_isCollected={false}
-						cardVersion={data?.coreData?.data?.rarities?.find(
-							(rarity) => rarity.eaId === card.versionId
-						)}
-						core={data?.coreData?.data}
-						additionalCoreData={data.additionalCoreData}
+						_isNotCollected={false}
 						_ignoredScale={true}
 					/>
 				{/each}

@@ -25,21 +25,3 @@ function createPersistentStore(key) {
 export const collectedCardsStore = createPersistentStore(STORAGE_KEYS.collected);
 export const impossibleCardsStore = createPersistentStore(STORAGE_KEYS.impossible);
 
-export function toggleCard(store, versionId, resourceId) {
-	let result;
-	store.update((map) => {
-		const currentSet = new Set(map[versionId] ?? []);
-		if (currentSet.has(resourceId)) {
-			currentSet.delete(resourceId);
-			result = true;
-		} else {
-			currentSet.add(resourceId);
-			result = false;
-		}
-		return {
-			...map,
-			[versionId]: [...currentSet]
-		};
-	});
-	return result;
-}

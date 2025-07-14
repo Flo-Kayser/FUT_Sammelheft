@@ -22,6 +22,8 @@ function getInitialSettings() {
 				showSkillMoves: parsed.showSkillMoves ?? true,
 
 				playAnimationOnCardCollect : parsed.playAnimationOnCardCollect ?? false,
+
+				favoriteSquads : parsed.favoriteSquads ?? [],
 			};
 		} catch (err) {
 			console.error('Fehler beim Laden der Einstellungen:', err);
@@ -40,6 +42,7 @@ function getInitialSettings() {
 		showSkillMoves: true,
 
 		playAnimationOnCardCollect: false,
+		favoriteSquads: [],
 	};
 }
 

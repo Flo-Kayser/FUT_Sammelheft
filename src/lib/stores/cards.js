@@ -19,7 +19,7 @@ export const cardsByVersionId = derived(
 		) {
 			return $allCardsStore;
 		}
-
+		
 		return $allCardsStore.filter((card) => card.versionId === $cardsFilter.versionId);
 	}
 );
