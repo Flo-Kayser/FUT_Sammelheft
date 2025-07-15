@@ -24,6 +24,7 @@ function getInitialSettings() {
 				playAnimationOnCardCollect : parsed.playAnimationOnCardCollect ?? false,
 
 				favoriteSquads : parsed.favoriteSquads ?? [],
+				favoriteOfficialBatches: parsed.favoriteOfficialBatches ?? [],
 			};
 		} catch (err) {
 			console.error('Fehler beim Laden der Einstellungen:', err);
@@ -43,6 +44,7 @@ function getInitialSettings() {
 
 		playAnimationOnCardCollect: false,
 		favoriteSquads: [],
+		favoriteOfficialBatches: [],
 	};
 }
 

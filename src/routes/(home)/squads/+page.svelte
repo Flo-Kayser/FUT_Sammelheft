@@ -50,12 +50,11 @@
 						const bFav = bIndex !== -1;
 
 						if (aFav && bFav) {
-							return bIndex - aIndex; // beide sind Favoriten → nach Reihenfolge im Store
+							return bIndex - aIndex; 
 						}
-						if (aFav) return -1; // a ist Favorit, b nicht → a kommt vor b
-						if (bFav) return 1; // b ist Favorit, a nicht → b kommt vor a
+						if (aFav) return -1;
+						if (bFav) return 1; 
 
-						// keiner ist Favorit → alphabetisch
 						return a.name.localeCompare(b.name);
 					})
 			: [];
