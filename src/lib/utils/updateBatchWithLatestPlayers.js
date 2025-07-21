@@ -1,4 +1,4 @@
-import { filterPlayersFromTemplate } from '$lib/utils/playerFilterFromtemplate';
+import { filterPlayersFromTemplate } from '$lib/utils/playerFilterFromTemplate';
 
 export function updateBatchWithLatestPlayers(batch, allCards, managerData) {
 	if (!batch?.filter || batch.templateId === 0) {

@@ -2,7 +2,7 @@
 import { get } from 'svelte/store';
 import { allCardsStore } from '$lib/stores/cards';
 import { managerDataStore } from '$lib/stores/dataStores';
-import { filterPlayersFromTemplate } from './playerFilterFromTemplate';
+import { filterPlayersFromTemplate } from '$lib/utils/playerFilterFromTemplate';
 
 export function updateBatch(batch) {
 	const allCards = get(allCardsStore);
