@@ -14,7 +14,7 @@
 	import FinishTheBatchStep from './newBatchOverlayComponents/finishTheBatchStep.svelte';
 	import Icon from '../components/icon.svelte';
 
-	import { filterPlayersFromTemplate } from '$lib/utils/playerFilterFromTemplate.js';
+	import { filterPlayersFromTemplate } from '$lib/utils/playerFilterFromTemplate';
 
 	import { insertBatch } from '$lib/utils/addCustomBatchesHelper.js';
 
