@@ -17,10 +17,17 @@
 	let suggestionRefs = [];
 
 	$: playerNames = Array.from(new Set($allCardsStore?.map((card) => card.name)));
+	
+	function normalizeString(str) {
+		return str
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase();
+	}
 
 	$: matchingPlayerNames =
-		searchTerm.length > 1
-			? playerNames.filter((name) => name.toLowerCase().includes(searchTerm.toLowerCase()))
+		searchTerm.length > 0
+			? playerNames.filter((name) => normalizeString(name).includes(normalizeString(searchTerm)))
 			: [];
 
 	$: if (searchTerm.length === 0) {

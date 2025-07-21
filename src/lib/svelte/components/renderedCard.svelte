@@ -2,6 +2,12 @@
 	import { settingsStore } from '$lib/stores/settings';
 	import PlayStyleIcons from '$lib/svelte/partials/playStyleIcons.svelte';
 
+	import { totsColorStore } from '$lib/stores/collectionStore';
+	import { versionAssetsStore } from '$lib/stores/dataStores';
+
+	import { get } from 'svelte/store';
+	let totsColor = 0;
+
 	export let card,
 		cardVersion,
 		_isImpossible,
@@ -12,9 +18,21 @@
 
 	let scale;
 
-	$: textColor = '#' + (cardVersion?.eaId > 3 ? cardVersion?.large?.colors?.topText : cardVersion?.large?.[3]?.colors?.topText);
-	$: lineColor = '#' + (cardVersion?.eaId > 3 ? cardVersion?.large?.colors?.lines : cardVersion?.large?.[3]?.colors?.lines)
-	$: stripColor = '#' + (cardVersion?.eaId > 3 ? cardVersion?.large?.colors?.strip : cardVersion?.large?.[3]?.colors?.strip);
+	$: textColor =
+		'#' +
+		(cardVersion?.eaId > 3
+			? cardVersion?.large?.colors?.topText
+			: cardVersion?.large?.[3]?.colors?.topText);
+	$: lineColor =
+		'#' +
+		(cardVersion?.eaId > 3
+			? cardVersion?.large?.colors?.lines
+			: cardVersion?.large?.[3]?.colors?.lines);
+	$: stripColor =
+		'#' +
+		(cardVersion?.eaId > 3
+			? cardVersion?.large?.colors?.strip
+			: cardVersion?.large?.[3]?.colors?.strip);
 
 	if (_ignoredScale === false) {
 		settingsStore.subscribe((value) => (scale = value?.cardScale || 1));
@@ -32,6 +50,11 @@
 	};
 
 	$: labels = attributeLabels[isGoalkeeper ? 'TW' : 'notTW'];
+	$: {
+		if (cardVersion?.eaId === 11 || cardVersion?.eaId === 120) {
+			totsColor = get(totsColorStore)[card?.resourceId] ?? 0;
+		}
+	}
 </script>
 
 {#if card && cardVersion}
@@ -45,11 +68,48 @@
 				style={`color: ${textColor}`}
 			>
 				{#if cardVersion}
-					<img
-						src={`${cardVersion?.eaId > 3 ? `${cardVersion?.large?.url}` : `${cardVersion?.large?.[3]?.url}`}`}
-						alt={cardVersion.eaId}
-						class="pointer-events-none absolute -top-8"
-					/>
+					{#if (cardVersion?.eaId !== 11 && cardVersion?.eaId !== 120) || totsColor === 0}
+						<img
+							src={`${cardVersion?.eaId > 3 ? cardVersion?.large?.url : cardVersion?.large?.[3]?.url}`}
+							alt={cardVersion.eaId}
+							class="pointer-events-none absolute -top-8"
+						/>
+					{:else if totsColor === 1}
+						<img
+							src={cardVersion?.large?.url}
+							alt="TOTS"
+							class="pointer-events-none absolute -top-8"
+						/>
+					{:else if totsColor === 2}
+						<img
+							src={$versionAssetsStore?.filter((v) => v.eaId === 127)[0]?.large?.url}
+							alt="TOTS Champions"
+							class="pointer-events-none absolute -top-8"
+						/>
+					{:else if totsColor === 3}
+						<img
+							src={$versionAssetsStore?.find((v) => v.eaId === 127)?.large?.url}
+							alt="TOTS Champions"
+							class="pointer-events-none absolute -top-8 z-0 w-full"
+						/>
+						<img
+							src={cardVersion?.large?.url}
+							alt="TOTS Rot"
+							class="mask-diagonal pointer-events-none absolute -top-8 z-0 w-full"
+						/>
+					{/if}
+
+					<style>
+						.mask-diagonal {
+							-webkit-mask-image: linear-gradient(135deg, transparent 50%, black 50%);
+							mask-image: linear-gradient(135deg, transparent 50%, black 50%);
+							-webkit-mask-size: 100% 100%;
+							mask-size: 100% 100%;
+							-webkit-mask-repeat: no-repeat;
+							mask-repeat: no-repeat;
+						}
+					</style>
+
 					<img
 						src={card?.playerUrl}
 						alt={card?.cardName}
@@ -159,6 +219,24 @@
 							>
 							<span class="scale-y-[1.2]">{card?.weakFoot}</span>
 						</div>
+					</div>
+				{/if}
+
+				{#if $settingsStore.showSbcIcons && card?.sbcPrice != null}
+					<div class="absolute top-[82%] right-2 w-16">
+						<img
+							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752682232/sbc_qbac2i.png"
+							alt="SBC Icon"
+						/>
+					</div>
+				{/if}
+
+				{#if $settingsStore.showObjIcons && card?.isObjective}
+					<div class="absolute top-[82%] right-2 w-16">
+						<img
+							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752683376/obj_b0hiug.png"
+							alt="SBC Icon"
+						/>
 					</div>
 				{/if}
 			</div>

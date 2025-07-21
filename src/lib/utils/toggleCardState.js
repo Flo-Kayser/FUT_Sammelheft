@@ -1,5 +1,10 @@
-import { collectedCardsStore, impossibleCardsStore } from '$lib/stores/collectionStore';
+import {
+	collectedCardsStore,
+	impossibleCardsStore,
+	totsColorStore
+} from '$lib/stores/collectionStore';
 import { versionAssetsStore } from '$lib/stores/dataStores';
+
 import { get } from 'svelte/store';
 
 export function toggleCardState(card, state) {
@@ -21,6 +26,46 @@ export function toggleCardState(card, state) {
 			self: impossible?.[versionId]
 		}
 	};
+
+	if ((versionId === 11 && state === 'collect') || (versionId === 120 && state === 'collect')) {
+		if (impossible?.[versionId]?.includes(resourceId)) {
+			console.warn(`Karte ${name} ist als "unmöglich" markiert und kann nicht gesammelt werden.`);
+			return;
+		}
+
+		collectedCardsStore.update((store) => {
+			store[versionId] = store[versionId] || [];
+			if (!store[versionId].includes(resourceId)) {
+				store[versionId].push(resourceId);
+			}
+			return store;
+		});
+
+		totsColorStore.update((store) => {
+			const current = store[resourceId] ?? 0;
+
+			if (current < 3) {
+				store[resourceId] = current + 1;
+			} else {
+				const confirmed = confirm(`Möchtest du ${name} komplett aus der Sammlung entfernen?`);
+				if (!confirmed) return store;
+
+				collectedCardsStore.update((collectedStore) => {
+					const list = collectedStore[versionId] || [];
+					const index = list.indexOf(resourceId);
+					if (index !== -1) list.splice(index, 1);
+					if (list.length === 0) delete collectedStore[versionId];
+					return collectedStore;
+				});
+
+				delete store[resourceId];
+			}
+
+			return store;
+		});
+
+		return;
+	}
 
 	const s = stores[state];
 	if (!s) return;

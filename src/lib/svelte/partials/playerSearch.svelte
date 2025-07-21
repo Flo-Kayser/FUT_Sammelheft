@@ -18,9 +18,16 @@
 
 	$: playerNames = searchArray?.map((card) => card.name);
 
+	function normalizeString(str) {
+		return str
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase();
+	}
+
 	$: matchingPlayerNames =
 		searchTerm.length > 0
-			? playerNames.filter((name) => name.toLowerCase().includes(searchTerm.toLowerCase()))
+			? playerNames.filter((name) => normalizeString(name).includes(normalizeString(searchTerm)))
 			: [];
 
 	$: if (searchTerm.length === 0) {
@@ -56,9 +63,21 @@
 		return Math.floor(index / cardsPerPage) + 1;
 	}
 
-	$: textColor = '#' + (cardVersion?.eaId > 3 ? cardVersion?.large?.colors?.topText : cardVersion?.large?.[3]?.colors?.topText);
-	$: stripColor = '#' + (cardVersion?.eaId > 3 ? cardVersion?.large?.colors?.strip : cardVersion?.large?.[3]?.colors?.strip);
-	$: lineColor = '#' + (cardVersion?.eaId > 3 ? cardVersion?.large?.colors?.lines : cardVersion?.large?.[3]?.colors?.lines);
+	$: textColor =
+		'#' +
+		(cardVersion?.eaId > 3
+			? cardVersion?.large?.colors?.topText
+			: cardVersion?.large?.[3]?.colors?.topText);
+	$: stripColor =
+		'#' +
+		(cardVersion?.eaId > 3
+			? cardVersion?.large?.colors?.strip
+			: cardVersion?.large?.[3]?.colors?.strip);
+	$: lineColor =
+		'#' +
+		(cardVersion?.eaId > 3
+			? cardVersion?.large?.colors?.lines
+			: cardVersion?.large?.[3]?.colors?.lines);
 </script>
 
 <div class="absolute bottom-2 left-2 lg:left-4">

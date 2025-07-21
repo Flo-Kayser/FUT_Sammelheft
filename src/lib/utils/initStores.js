@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { get } from 'svelte/store';
 import { allCardsStore } from '$lib/stores/cards';
 import { versionAssetsStore, playStylePathsStore, managerDataStore } from '$lib/stores/dataStores';
-import { allBatches } from '$lib/stores/batches';
+import { allOfficialBatchesStore } from '$lib/stores/batches';
 
 async function loadIfEmpty(store, fetchFn, label) {
 	if (!browser) return;
@@ -63,7 +63,7 @@ export function ensurePlayStylePathsStore() {
 
 export function ensureBatchesStore() {
 	return loadIfEmpty(
-		allBatches,
+		allOfficialBatchesStore,
 		async () => {
 			const res = await fetch('https://raw.githubusercontent.com/Flo-Kayser/FUTCARDS/refs/heads/main/batches.json');
 			return await res.json();

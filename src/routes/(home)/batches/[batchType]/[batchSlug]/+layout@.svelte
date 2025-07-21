@@ -1,13 +1,16 @@
 <script>
 	import { allCardsStore } from '$lib/stores/cards.js';
-	import { allBatches } from '$lib/stores/batches.js';
+	import { allOfficialBatchesStore, customBatchesStore } from '$lib/stores/batches.js';
 	import { impossibleCardsStore, collectedCardsStore } from '$lib/stores/collectionStore.js';
 
 	import { goto } from '$app/navigation';
 	export let data, children;
+	
 
-	$: batchCardIds = $allBatches.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
-	$: console.log('Batch Card IDs:', batchCardIds);
+	$: batchStore = data?.batchType === 'officialBatches' ? $allOfficialBatchesStore : data?.batchType === 'myBatches' ? $customBatchesStore : null;
+
+	$: batchCardIds = batchStore.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
+	
 
 
 
@@ -35,7 +38,7 @@
 	<div class="relative h-screen overflow-hidden pt-4 backdrop-brightness-75 backdrop-grayscale-25">
 		<button
 			onclick={() => {
-				goto('/batches/officialBatches');
+				goto(`/batches/${data?.batchType}`); 
 			}}
 			class="absolute top-3 left-3 cursor-pointer rounded-md bg-[#e23070] px-2 py-1 font-bold text-[#19004f] shadow-xl transition duration-300 hover:brightness-80 active:scale-95"
 			>Batches - Übersicht</button

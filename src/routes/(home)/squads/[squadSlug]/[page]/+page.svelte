@@ -63,7 +63,7 @@
 			clearTimeout(timeout);
 			timeout = setTimeout(() => {
 				highlightedCardStore.set(null);
-			}, 2000);
+			}, $settingsStore?.highlightDurationInSec * 1000 || 2000);
 		}
 	});
 

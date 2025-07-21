@@ -3,13 +3,12 @@ import { browser } from '$app/environment';
 
 const STORAGE_KEYS = {
 	collected: 'collectedCards',
-	impossible: 'impossibleCards'
+	impossible: 'impossibleCards',
+	totsColor: 'totsColor'
 };
 
 function createPersistentStore(key) {
-	const initial = browser
-		? JSON.parse(localStorage.getItem(key) || '{}')
-		: {};
+	const initial = browser ? JSON.parse(localStorage.getItem(key) || '{}') : {};
 
 	const store = writable(initial);
 
@@ -24,4 +23,4 @@ function createPersistentStore(key) {
 
 export const collectedCardsStore = createPersistentStore(STORAGE_KEYS.collected);
 export const impossibleCardsStore = createPersistentStore(STORAGE_KEYS.impossible);
-
+export const totsColorStore = createPersistentStore(STORAGE_KEYS.totsColor);

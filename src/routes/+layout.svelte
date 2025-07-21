@@ -1,8 +1,6 @@
 <script>
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { allCardsStore } from '$lib/stores/cards';
-	import { allBatches } from '$lib/stores/batches';
 
 	import { goto } from '$app/navigation';
 	import {

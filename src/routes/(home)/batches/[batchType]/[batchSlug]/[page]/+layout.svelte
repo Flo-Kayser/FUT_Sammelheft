@@ -3,7 +3,7 @@
 	import { settingsStore } from '$lib/stores/settings.js';
 	import { versionAssetsStore } from '$lib/stores/dataStores';
 	import { allCardsStore } from '$lib/stores/cards.js';
-	import { allBatches } from '$lib/stores/batches.js';
+	import { allOfficialBatchesStore, customBatchesStore } from '$lib/stores/batches.js';
 
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
@@ -47,7 +47,10 @@
 	let _isLeagueFilterOpen = false;
 	let searchInput;
 
-	$: batchCardIds = $allBatches.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
+	$: batchStore = data?.batchType === 'officialBatches' ? $allOfficialBatchesStore : data?.batchType === 'myBatches' ? $customBatchesStore : null;
+
+	$: batchCardIds = batchStore.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
+
 
 	$: batchCards = $allCardsStore.filter((card) => batchCardIds.includes(card.resourceId));
 

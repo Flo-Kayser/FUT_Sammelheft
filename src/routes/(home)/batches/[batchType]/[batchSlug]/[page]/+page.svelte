@@ -12,7 +12,7 @@
 	import { allCardsStore } from '$lib/stores/cards.js';
 
 	import { toggleCardState } from '$lib/utils/toggleCardState';
-	import { allBatches } from '$lib/stores/batches.js';
+	import { allOfficialBatchesStore, customBatchesStore } from '$lib/stores/batches.js';
 
 	export let data;
 
@@ -32,7 +32,14 @@
 
 	$: currentPage = data.currentPage;
 
-	$: batchCardIds = $allBatches.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
+	$: batchStore =
+		data?.batchType === 'officialBatches'
+			? $allOfficialBatchesStore
+			: data?.batchType === 'myBatches'
+				? $customBatchesStore
+				: null;
+
+	$: batchCardIds = batchStore.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
 	$: batchCards = (() => {
 		if (!$allCardsStore || !$settingsStore || !$collectedCardsStore || !$impossibleCardsStore)
 			return [];
@@ -79,9 +86,12 @@
 
 		if (id) {
 			clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				highlightedCardStore.set(null);
-			}, 2000);
+			timeout = setTimeout(
+				() => {
+					highlightedCardStore.set(null);
+				},
+				$settingsStore?.highlightDurationInSec * 1000 || 2000
+			);
 		}
 	});
 

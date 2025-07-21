@@ -35,9 +35,9 @@
 				Wähle aus, welche Infos auf deinen Karten angezeigt werden:
 			</div>
 			<div class="flex flex-col gap-2 text-black md:pl-8">
-				{#each [{ label: 'PlayStyles:', key: 'showPlayStylePlus' }, { label: 'Alternativpositionen:', key: 'showPossiblePositions' }, { label: 'Skill Moves und Schwacher Fuß:', key: 'showSkillMoves' }, { label: 'Animation abspielen beim freischalten der Karte', key: 'playAnimationOnCardCollect' }] as item}
+				{#each [{ label: 'PlayStyles:', key: 'showPlayStylePlus' }, { label: 'Alternativpositionen:', key: 'showPossiblePositions' }, { label: 'Skill Moves und Schwacher Fuß:', key: 'showSkillMoves' }, { label: 'Anzeigen von Icons der SBC-Karten:', key: 'showSbcIcons' }, { label: 'Anzeigen von Icons der Objective-Karten:', key: 'showObjIcons' }, { label: 'Animation abspielen beim freischalten der Karte', key: 'playAnimationOnCardCollect' }] as item}
 					<label
-						class="flex w-full items-center justify-between gap-4 text-xs font-bold md:text-base"
+						class="flex w-full items-center justify-between gap-4 text-xs font-bold last:mt-4 md:text-base"
 					>
 						<div>{item.label}</div>
 						<input type="checkbox" bind:checked={$settingsStore[item.key]} class="peer sr-only" />
@@ -64,6 +64,26 @@
 						</div>
 					</label>
 				{/each}
+
+				<label
+					for="highlightDurationInSec"
+					class="flex w-full items-center justify-between gap-4 text-xs font-bold last:mt-4 md:text-base"
+				>
+					<span
+						>Legt fest, wie lange ein Spieler visuell hervorgehoben wird, nachdem er gesucht wurde
+						(in Sekunden).</span
+					>
+					<input
+						type="number"
+						name="highlightDurationInSec"
+						id="highlightDurationInSec"
+						min="1"
+						max="10"
+						step="1"
+						bind:value={$settingsStore.highlightDurationInSec}
+						class="rounded-md border-2 border-amber-500/70 bg-white px-2 py-1 text-xs font-bold text-stone-900 w-16 md:text-base"
+					/>
+				</label>
 			</div>
 		</div>
 		<div class="py-2">
@@ -89,16 +109,16 @@
 					</div>
 				</button>
 			</div>
-			<div class="mt-4 border-t border-dashed px-2 pt-2 text-sm md:text-base text-stone-900">
+			<div class="mt-4 border-t border-dashed px-2 pt-2 text-sm text-stone-900 md:text-base">
 				Hier kannst du deine Sicherungkopie hochladen:
 			</div>
 			<div class="mb-4 pl-2 md:pl-8">
-				<div class="text-xs md:text-sm text-stone-900">
+				<div class="text-xs text-stone-900 md:text-sm">
 					<span class="font-bold">Achtung:</span> Beim Hochladen wird dein aktuelles Sammelheft überschrieben!
 				</div>
 				<div class="mt-2">
 					<input
-						class="block w-full cursor-pointer rounded-lg text-xs border-2 border-amber-500/70 bg-white px-2 py-1"
+						class="block w-full cursor-pointer rounded-lg border-2 border-amber-500/70 bg-white px-2 py-1 text-xs"
 						aria-describedby="file_input_help"
 						accept="application/json"
 						type="file"
