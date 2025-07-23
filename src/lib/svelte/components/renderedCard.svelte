@@ -64,7 +64,7 @@
 			style="transform: scale({scale}); width: 320px; height: 400px;"
 		>
 			<div
-				class={`absolute h-full w-full ${_isImpossible ? 'brightness-50 grayscale-200' : ''} ${_isNotCollected ? 'opacity-80 grayscale-100' : ''} `}
+				class={`absolute h-full w-full ${_isImpossible ? 'brightness-50 grayscale-100' : ''} ${_isNotCollected ? 'opacity-80 grayscale-100' : ''} `}
 				style={`color: ${textColor}`}
 			>
 				{#if cardVersion}

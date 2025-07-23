@@ -4,6 +4,7 @@ import {
 	totsColorStore
 } from '$lib/stores/collectionStore';
 import { versionAssetsStore } from '$lib/stores/dataStores';
+import { settingsStore } from '$lib/stores/settings';
 
 import { get } from 'svelte/store';
 
@@ -74,24 +75,36 @@ export function toggleCardState(card, state) {
 		console.warn(`Karte ${name} (ID: ${resourceId}, Version: ${versionId}) ${s.conflictMsg}`);
 		return;
 	}
+	const playAnimation = get(settingsStore).playAnimationOnCardCollect;
+	const isAlreadyCollected = collected?.[versionId]?.includes(resourceId);
 
-	s.target.update((store) => {
-		const list = store[versionId] || [];
-		const index = list.indexOf(resourceId);
+	if (state === 'collect' && !isAlreadyCollected && playAnimation) {
+		setTimeout(() => {
+			s.target.update((store) => {
+				store[versionId] = store[versionId] || [];
+				store[versionId].push(resourceId);
+				return store;
+			});
+		}, 4000);
+	} else {
+		s.target.update((store) => {
+			const list = store[versionId] || [];
+			const index = list.indexOf(resourceId);
 
-		if (index !== -1) {
-			const confirmed = confirm(
-				`Möchtest du ${get(versionAssetsStore)?.find((v) => v.eaId === versionId)?.name} ${name} wirklich aus deiner ${state === 'collect' ? 'Sammlung' : '"Unmöglich"-Liste'} entfernen?`
-			);
-			if (!confirmed) return store;
+			if (index !== -1) {
+				const confirmed = confirm(
+					`Möchtest du ${get(versionAssetsStore)?.find((v) => v.eaId === versionId)?.name} ${name} wirklich aus deiner ${state === 'collect' ? 'Sammlung' : '"Unmöglich"-Liste'} entfernen?`
+				);
+				if (!confirmed) return store;
 
-			list.splice(index, 1);
-			if (list.length === 0) delete store[versionId];
-		} else {
-			if (!store[versionId]) store[versionId] = [];
-			store[versionId].push(resourceId);
-		}
+				list.splice(index, 1);
+				if (list.length === 0) delete store[versionId];
+			} else {
+				if (!store[versionId]) store[versionId] = [];
+				store[versionId].push(resourceId);
+			}
 
-		return store;
-	});
+			return store;
+		});
+	}
 }
