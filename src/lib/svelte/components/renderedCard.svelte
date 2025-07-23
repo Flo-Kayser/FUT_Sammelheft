@@ -222,7 +222,7 @@
 					</div>
 				{/if}
 
-				{#if $settingsStore.showSbcIcons && card?.sbcPrice != null}
+				{#if $settingsStore.showSbcIcons && card?.sbcPrice != null && card?.price == null}
 					<div class="absolute top-[82%] right-2 w-16">
 						<img
 							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752682232/sbc_qbac2i.png"
@@ -231,7 +231,7 @@
 					</div>
 				{/if}
 
-				{#if $settingsStore.showObjIcons && card?.isObjective}
+				{#if $settingsStore.showObjIcons && card?.isObjective && card?.price == null}
 					<div class="absolute top-[82%] right-2 w-16">
 						<img
 							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752683376/obj_b0hiug.png"
