@@ -76,7 +76,7 @@
 			clone.style.transform = `translate(${targetX}px, ${targetY}px) scale(${scale}) rotateY(360deg)`;
 
 			animationTriggerCard = card;
-		}, 100);
+		}, 500);
 		setTimeout(() => {
 			clone.style.transform = `translate(0px, 0px) scale(1) rotateY(0deg)`;
 		}, 3300);
