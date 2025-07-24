@@ -231,7 +231,7 @@
 					</div>
 				{/if}
 
-				{#if $settingsStore.showObjIcons && card?.isObjective && card?.price == null}
+				{#if ($settingsStore.showObjIcons && card?.isObjective && card?.price == null) || ($settingsStore.showObjIcons && card?.isObjective && card?.price == '0')}
 					<div class="absolute top-[82%] right-2 w-16">
 						<img
 							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752683376/obj_b0hiug.png"
