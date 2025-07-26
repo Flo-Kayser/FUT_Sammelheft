@@ -16,7 +16,22 @@
 	let matchingPlayerNames = [];
 	let suggestionRefs = [];
 
-	$: playerNames = searchArray?.map((card) => card.name);
+	$: playerNames = searchArray
+		? searchArray.reduce(
+				(acc, card) => {
+					if (!acc.seen.has(card.resourceId)) {
+						acc.seen.add(card.resourceId);
+						acc.names.push(card.name);
+					}
+					return acc;
+				},
+				{ seen: new Set(), names: [] }
+			).names
+		: [];
+
+	$: console.log('Player names:', playerNames);
+
+	highlightedCardStore.subscribe(v=>console.log(v))
 
 	function normalizeString(str) {
 		return str
@@ -49,9 +64,11 @@
 	function findPlayerIndex() {
 		const search = searchTerm.toLowerCase();
 		const index = playerNames.findIndex((name) => name.toLowerCase().includes(search));
+		console.log('Found index:', index, 'for search term:', search);
+		console.log(searchArray);
 		if (index !== -1) {
-			highlightedCardStore.set(searchArray[index].resourceId);
 			goto(`./page=${getPlayerPageNumber(index)}`);
+			highlightedCardStore.set(searchArray[index].resourceId);
 			searchTerm = '';
 			hoveredName = null;
 			selectedSuggestionIndex = -1;

@@ -47,12 +47,26 @@
 	let _isLeagueFilterOpen = false;
 	let searchInput;
 
-	$: batchStore = data?.batchType === 'officialBatches' ? $allOfficialBatchesStore : data?.batchType === 'myBatches' ? $customBatchesStore : null;
+	$: batchStore =
+		data?.batchType === 'officialBatches'
+			? $allOfficialBatchesStore
+			: data?.batchType === 'myBatches'
+				? $customBatchesStore
+				: null;
 
 	$: batchCardIds = batchStore.find((batch) => batch.slug === data.batchSlug)?.allIds || [];
 
+	$: batchCards = (() => {
+		if (!$allCardsStore) return [];
 
-	$: batchCards = $allCardsStore.filter((card) => batchCardIds.includes(card.resourceId));
+		const seen = new Set();
+		return $allCardsStore.filter((card) => {
+			if (!batchCardIds.includes(card.resourceId)) return false;
+			if (seen.has(card.resourceId)) return false;
+			seen.add(card.resourceId);
+			return true;
+		});
+	})();
 
 	onMount(async () => {
 		await ensureVersionAssetsStore();
@@ -102,7 +116,6 @@
 	/>
 
 	<PaginationNav {currentPage} {totalPages} {cardVersion} />
-
 
 	<PageSettings {cardVersion} />
 </section>
