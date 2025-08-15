@@ -160,7 +160,7 @@
 			bind:value={searchTerm}
 			placeholder="Nach Batch / Eventteam suchen..."
 			class="col-start-1 w-full rounded-lg px-4 py-2 text-lg font-bold text-white outline-none lg:col-start-2"
-			style={`background-image: url('https://res.cloudinary.com/dppqw6sbt/image/upload/v1752452967/bg-badges_pylnti.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
+			style={`background-image: url('https://ucarecdn.com/5f772506-991c-4043-9d69-a1510e6ca152/img_batches.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
 		/>
 
 		{#if cardsReady === true}
@@ -173,7 +173,7 @@
 						1
 							? ' text-[#e23070] lg:text-[#14004a]'
 							: 'text-[#e23070]'}"
-						style={`background-image: url('https://res.cloudinary.com/dppqw6sbt/image/upload/v1752452967/bg-badges_pylnti.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
+						style={`background-image: url('https://ucarecdn.com/5f772506-991c-4043-9d69-a1510e6ca152/img_batches.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
 					>
 						<div class="mb-4">{batch?.name}</div>
 						{#if visibleBatches.has(index)}
@@ -265,7 +265,7 @@
 		{#if $customBatchesStore.length === 0 && data?.batchType === 'myBatches'}
 			<div
 				class="col-span-2 flex flex-col gap-4 rounded-lg p-10 font-bold text-white"
-				style={`background-image: url('https://res.cloudinary.com/dppqw6sbt/image/upload/v1752452967/bg-badges_pylnti.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
+				style={`background-image: url('https://ucarecdn.com/5f772506-991c-4043-9d69-a1510e6ca152/img_batches.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
 			>
 				<span>Keine eigenen Batches gefunden.</span>
 				<span>

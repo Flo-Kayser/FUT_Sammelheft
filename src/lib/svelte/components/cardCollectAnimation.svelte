@@ -57,7 +57,7 @@
 		on:ended={handleEnded}
 	>
 		<source
-			src={'https://res.cloudinary.com/dppqw6sbt/video/upload/v1752452760/New_Card_Unlocked_6_fm3g64.webm'}
+			src={'https://ucarecdn.com/d1b66daa-ee43-481a-a194-72167f4ba48e/New_Card_Unlocked_6.webm'}
 			type="video/webm"
 		/>
 	</video>

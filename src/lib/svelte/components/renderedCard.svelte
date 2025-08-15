@@ -225,7 +225,7 @@
 				{#if $settingsStore.showSbcIcons && card?.sbcPrice != null && card?.price == null}
 					<div class="absolute top-[82%] right-2 w-16">
 						<img
-							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752682232/sbc_qbac2i.png"
+							src="https://ucarecdn.com/379bef27-2452-44b5-9da4-3fdbcb8ee335/sbcIcon.png"
 							alt="SBC Icon"
 						/>
 					</div>
@@ -234,8 +234,8 @@
 				{#if ($settingsStore.showObjIcons && card?.isObjective && card?.price == null) || ($settingsStore.showObjIcons && card?.isObjective && card?.price == '0')}
 					<div class="absolute top-[82%] right-2 w-16">
 						<img
-							src="https://res.cloudinary.com/dppqw6sbt/image/upload/v1752683376/obj_b0hiug.png"
-							alt="SBC Icon"
+							src="https://ucarecdn.com/17c3843e-e195-4252-9186-8fd7cfbd4a00/objIcon.png"
+							alt="OBJ Icon"
 						/>
 					</div>
 				{/if}

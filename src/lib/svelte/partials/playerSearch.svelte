@@ -29,9 +29,7 @@
 			).names
 		: [];
 
-	$: console.log('Player names:', playerNames);
 
-	highlightedCardStore.subscribe(v=>console.log(v))
 
 	function normalizeString(str) {
 		return str
@@ -64,8 +62,6 @@
 	function findPlayerIndex() {
 		const search = searchTerm.toLowerCase();
 		const index = playerNames.findIndex((name) => name.toLowerCase().includes(search));
-		console.log('Found index:', index, 'for search term:', search);
-		console.log(searchArray);
 		if (index !== -1) {
 			goto(`./page=${getPlayerPageNumber(index)}`);
 			highlightedCardStore.set(searchArray[index].resourceId);

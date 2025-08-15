@@ -33,7 +33,7 @@
 </script>
 
 <div
-	style={`background-image: url('https://res.cloudinary.com/dppqw6sbt/image/upload/v1752452967/bg-badges_pylnti.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
+	style={`background-image: url('https://ucarecdn.com/5f772506-991c-4043-9d69-a1510e6ca152/img_batches.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;`}
 >
 	<div class="relative h-screen overflow-hidden pt-4 backdrop-brightness-75 backdrop-grayscale-25">
 		<button

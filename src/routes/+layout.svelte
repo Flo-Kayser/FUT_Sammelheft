@@ -24,7 +24,7 @@
 </script>
 
 <div
-	style={`background-image: url('https://res.cloudinary.com/dppqw6sbt/image/upload/v1752453063/rhs_snxmkd.jpg'); background-size: cover; background-position: 70%; background-repeat: no-repeat; background-attachment: fixed;`}
+	style={`background-image: url('https://ucarecdn.com/72a68f56-1f0f-430d-87ac-e35b67901241/bg_img.png'); background-size: cover; background-position: 70%; background-repeat: no-repeat; background-attachment: fixed;`}
 	class="min-h-screen"
 >
 	{@render children()}
